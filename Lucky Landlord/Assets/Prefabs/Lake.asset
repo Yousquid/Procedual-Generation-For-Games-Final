@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af012f1519c78341a7f835c54cbbe19, type: 3}
+  m_Name: Lake
+  m_EditorClassIdentifier: 
+  influenceModifiers:
+  - target: {fileID: 11400000}
+    weight: 0.1
+  - target: {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
+    weight: 0.05
+  landscapeName: Lake
+  landscapePrefab: {fileID: 3331320863965997231, guid: f319250949626c7458658aa0574f7639, type: 3}
+  maxBuildingLimit: 2
+  baseIncomeValue: 1
+  specialEffectDescription: Increase the income of this grid by 1 for each adjacent
+    Lake Landscape.
+  baseProbability: 0.136

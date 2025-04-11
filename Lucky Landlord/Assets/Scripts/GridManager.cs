@@ -19,6 +19,9 @@ public class GridManager : MonoBehaviour
 
     private Grid<GameGridObject> grid;
 
+    [SerializeField] private Transform gridParent; 
+
+
     public class GameGridObject
     {
         public LandscapeTypeSo landscape;
@@ -46,6 +49,7 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         InitializeGrid();
+        VisualizeGrid();
     }
 
     private void InitializeGrid()
@@ -110,6 +114,29 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private void VisualizeGrid()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameGridObject gridObj = grid.GetGridObject(x, y);
+                Vector3 worldPos = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2, cellSize / 2);
+
+                // 获取对应Prefab
+                GameObject prefab = gridObj.landscape?.landscapePrefab;
+                if (prefab != null)
+                {
+                    Instantiate(
+                        prefab,
+                        worldPos,
+                        Quaternion.identity,
+                        gridParent
+                    );
+                }
+            }
+        }
+    }
     private float[,] GeneratePerlinNoiseMap()
     {
         float[,] noise = new float[width, height];

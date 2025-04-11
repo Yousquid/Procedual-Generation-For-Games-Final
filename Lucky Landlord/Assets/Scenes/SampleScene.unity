@@ -580,13 +580,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64014410963112f469029ea136fd5876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 10
-  cellSize: 10
-  originPosition: {x: 0, y: 0, z: 0}
-  landscapeTypes: []
+  width: 18
+  height: 8
+  cellSize: 1
+  originPosition: {x: -9, y: -4.5, z: 0}
+  landscapeTypes:
+  - {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}
+  - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
+  - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
+  - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
+  - {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
+  - {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
+  - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
+  - {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
   resourceTypes: []
   buildingTypes: []
+  gridParent: {fileID: 1517112020}
 --- !u!4 &978205595
 Transform:
   m_ObjectHideFlags: 0
@@ -602,6 +611,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1517112019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517112020}
+  m_Layer: 0
+  m_Name: GridOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1517112020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517112019}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -612,3 +652,4 @@ SceneRoots:
   - {fileID: 771183873}
   - {fileID: 570645844}
   - {fileID: 786914477}
+  - {fileID: 1517112020}

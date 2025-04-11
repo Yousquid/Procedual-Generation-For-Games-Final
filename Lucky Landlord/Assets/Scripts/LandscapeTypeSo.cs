@@ -8,6 +8,14 @@ public class LandscapeInfluence
     public float weight;
 }
 
+[System.Serializable]
+public class ResourceProbability
+{
+    public ResourceTypeSo resource;
+    [Range(0f, 1f)]
+    public float probability;
+}
+
 [CreateAssetMenu(fileName = "LandscapeTypeSo", menuName = "Scriptable Objects/LandscapeTypeSo")]
 public class LandscapeTypeSo : ScriptableObject
 {

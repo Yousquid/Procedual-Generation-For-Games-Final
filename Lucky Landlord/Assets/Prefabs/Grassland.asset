@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af012f1519c78341a7f835c54cbbe19, type: 3}
+  m_Name: Grassland
+  m_EditorClassIdentifier: 
+  influenceModifiers:
+  - target: {fileID: 11400000}
+    weight: 0.1
+  - target: {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
+    weight: 0.1
+  landscapeName: Grassland
+  landscapePrefab: {fileID: 4861504926548760445, guid: 6828db1de06d91d47981517df849808b, type: 3}
+  maxBuildingLimit: 2
+  baseIncomeValue: 2
+  specialEffectDescription: Increase the income of this grid by 1 for each adjacent
+    Grass, Plain, Lake.
+  baseProbability: 0.136

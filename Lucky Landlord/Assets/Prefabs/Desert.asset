@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af012f1519c78341a7f835c54cbbe19, type: 3}
+  m_Name: Desert
+  m_EditorClassIdentifier: 
+  influenceModifiers:
+  - target: {fileID: 11400000}
+    weight: 0.15
+  - target: {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
+    weight: -0.05
+  - target: {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
+    weight: -0.1
+  - target: {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
+    weight: -0.05
+  - target: {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
+    weight: -0.05
+  - target: {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
+    weight: 0.1
+  landscapeName: Desert
+  landscapePrefab: {fileID: 521354347065820335, guid: 4062e23622eb31044bbba8a4b0cadb60, type: 3}
+  maxBuildingLimit: 4
+  baseIncomeValue: 0
+  specialEffectDescription: Double the income of this grid
+  baseProbability: 0.085

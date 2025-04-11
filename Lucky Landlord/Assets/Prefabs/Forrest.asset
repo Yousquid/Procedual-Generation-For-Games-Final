@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af012f1519c78341a7f835c54cbbe19, type: 3}
+  m_Name: Forrest
+  m_EditorClassIdentifier: 
+  influenceModifiers:
+  - target: {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}
+    weight: -0.1
+  - target: {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
+    weight: 0.1
+  - target: {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
+    weight: -0.05
+  - target: {fileID: 11400000}
+    weight: 0.15
+  landscapeName: Forrest
+  landscapePrefab: {fileID: 8990029002731399491, guid: 13d87a6a11872f8458d8c5b88ce771f9, type: 3}
+  maxBuildingLimit: 2
+  baseIncomeValue: 2
+  specialEffectDescription: Increase the income of this grid by 2 for each adjacent
+    Forest Landscape.
+  baseProbability: 0.136

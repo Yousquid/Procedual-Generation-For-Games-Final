@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7af012f1519c78341a7f835c54cbbe19, type: 3}
-  m_Name: Grass
+  m_Name: Wasteland
   m_EditorClassIdentifier: 
-  landscapeName: 
-  landscapePrefab: {fileID: 0}
-  maxBuildingLimit: 0
+  influenceModifiers: []
+  landscapeName: Wasteland
+  landscapePrefab: {fileID: 7637269123178723388, guid: 59f769f9febc23140ac2ff2c00718d40, type: 3}
+  maxBuildingLimit: 5
   baseIncomeValue: 0
-  specialEffectDescription: 
+  specialEffectDescription: None
+  baseProbability: 0.085
