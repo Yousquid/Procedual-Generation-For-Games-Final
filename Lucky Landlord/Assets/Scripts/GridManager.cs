@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.SceneManagement;
+
 
 
 public class GridManager : MonoBehaviour
@@ -18,6 +21,8 @@ public class GridManager : MonoBehaviour
     public List<BuildingType> buildingTypes;
 
     private Grid<GameGridObject> grid;
+
+    private Dictionary<Vector2Int, Transform> cellParents = new Dictionary<Vector2Int, Transform>();
 
     [SerializeField] private Transform gridParent; 
 
@@ -49,6 +54,7 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         InitializeGrid();
+        GenerateResources();
         VisualizeGrid();
     }
 
@@ -116,23 +122,139 @@ public class GridManager : MonoBehaviour
 
     private void VisualizeGrid()
     {
+        // 使用缓存系统避免重复生成
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                GameGridObject gridObj = grid.GetGridObject(x, y);
+                Vector2Int gridPos = new Vector2Int(x, y);
                 Vector3 worldPos = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2, cellSize / 2);
 
-                // 获取对应Prefab
-                GameObject prefab = gridObj.landscape?.landscapePrefab;
-                if (prefab != null)
+                // 获取或创建父物体
+                if (!cellParents.TryGetValue(gridPos, out Transform cellParent))
                 {
-                    Instantiate(
-                        prefab,
-                        worldPos,
-                        Quaternion.identity,
-                        gridParent
-                    );
+                    cellParent = CreateCellParent(x, y, worldPos);
+                    cellParents.Add(gridPos, cellParent);
+                }
+
+                // 清除旧的可视化内容
+                ClearCellVisualization(cellParent);
+
+                // 生成新内容
+                GameGridObject gridObj = grid.GetGridObject(x, y);
+                VisualizeTerrain(gridObj, cellParent);
+                VisualizeResource(gridObj, cellParent);
+            }
+        }
+    }
+
+    private void ClearCellVisualization(Transform parent)
+    {
+        // 使用倒序遍历避免修改集合问题
+        for (int i = parent.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(parent.GetChild(i).gameObject);
+        }
+    }
+
+    private void OnGridChanged(int x, int y)
+    {
+        if (cellParents.TryGetValue(new Vector2Int(x, y), out Transform parent))
+        {
+            ClearCellVisualization(parent);
+            GameGridObject gridObj = grid.GetGridObject(x, y);
+            VisualizeTerrain(gridObj, parent);
+            VisualizeResource(gridObj, parent);
+        }
+    }
+
+    private Transform CreateCellParent(int x, int y, Vector3 position)
+    {
+        GameObject parentObj = new GameObject($"Cell_{x}_{y}");
+        parentObj.transform.position = position;
+        parentObj.transform.SetParent(gridParent);
+        return parentObj.transform;
+    }
+
+    private void VisualizeTerrain(GameGridObject gridObj, Transform parent)
+    {
+        if (gridObj.landscape?.landscapePrefab != null)
+        {
+            GameObject terrain = Instantiate(
+                gridObj.landscape.landscapePrefab,
+                parent.position,
+                Quaternion.identity,
+                parent
+            );
+            terrain.name = "Terrain";
+            SetSortingOrder(terrain, 0); // 地形在最底层
+        }
+    }
+
+    private void VisualizeResource(GameGridObject gridObj, Transform parent)
+    {
+        if (gridObj.resource?.resourcePrefab != null)
+        {
+         
+            GameObject resource = Instantiate(
+                gridObj.resource.resourcePrefab,
+                parent.position,
+                Quaternion.identity,
+                parent
+            );
+            resource.name = "Resource";
+            SetSortingOrder(resource, 1); // 资源在顶层
+
+            // 添加资源动画（可选）
+            if (resource.TryGetComponent<Animator>(out var anim))
+            {
+                anim.Play("ResourceIdle");
+            }
+        }
+    }
+
+    private void SetSortingOrder(GameObject obj, int order)
+    {
+        if (obj.TryGetComponent<SpriteRenderer>(out var renderer))
+        {
+            renderer.sortingOrder = order;
+        }
+    }
+
+    // 修改后的资源生成方法（添加可视化标记）
+    private void GenerateResources()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameGridObject cell = grid.GetGridObject(x, y);
+                // 清除旧资源（如果需要重新生成）
+                cell.resource = null;
+
+                LandscapeTypeSo landscape = cell.landscape;
+                if (landscape?.resourceProbabilities == null ||
+                    landscape.resourceProbabilities.Count == 0)
+                    continue;
+
+                // 使用更精确的概率算法
+                float totalWeight = 1 + landscape.resourceProbabilities
+                    .Sum(r => r.probability);
+
+                if (totalWeight <= 0) continue;
+
+                float rnd = Random.Range(0f, totalWeight);
+                float cumulative = 0f;
+
+                foreach (var rp in landscape.resourceProbabilities)
+                {
+                    cumulative += rp.probability;
+                    if (rnd <= cumulative && rp.resource != null)
+                    {
+                        cell.resource = rp.resource;
+                        grid.TriggerGridObjectChanged(x, y); // 通知刷新显示
+                        break;
+                    }
                 }
             }
         }
@@ -185,6 +307,18 @@ public class GridManager : MonoBehaviour
             new Vector2Int(-1, 0), new Vector2Int(1, 0),
             new Vector2Int(0, -1), new Vector2Int(0, 1)
         };
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            VisualizeGrid();
+        }
     }
 
 

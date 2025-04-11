@@ -21,6 +21,8 @@ public class LandscapeTypeSo : ScriptableObject
 {
     public List<LandscapeInfluence> influenceModifiers;
 
+    public List<ResourceProbability> resourceProbabilities;
+
     public string landscapeName;
     public GameObject landscapePrefab;
     public int maxBuildingLimit;

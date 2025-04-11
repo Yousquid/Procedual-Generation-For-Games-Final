@@ -21,6 +21,13 @@ MonoBehaviour:
     weight: -0.05
   - target: {fileID: 11400000}
     weight: 0.15
+  resourceProbabilities:
+  - resource: {fileID: 11400000, guid: d3354a8e9edc8674ca35053b04486169, type: 2}
+    probability: 0.2
+  - resource: {fileID: 11400000, guid: d9e028c9e0380224a92ce312a8a7fb3c, type: 2}
+    probability: 0.05
+  - resource: {fileID: 11400000, guid: 58022c09d228de144973b52240e382fa, type: 2}
+    probability: 0.05
   landscapeName: Forrest
   landscapePrefab: {fileID: 8990029002731399491, guid: 13d87a6a11872f8458d8c5b88ce771f9, type: 3}
   maxBuildingLimit: 2

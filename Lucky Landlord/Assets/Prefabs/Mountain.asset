@@ -23,6 +23,13 @@ MonoBehaviour:
     weight: 0.15
   - target: {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
     weight: -0.15
+  resourceProbabilities:
+  - resource: {fileID: 11400000, guid: b2924cb91b8bc8c4ba6aac8a3595e607, type: 2}
+    probability: 0.12
+  - resource: {fileID: 11400000, guid: 7715d6adcdf54174b9e2a9435024b078, type: 2}
+    probability: 0.15
+  - resource: {fileID: 11400000, guid: d3354a8e9edc8674ca35053b04486169, type: 2}
+    probability: 0.05
   landscapeName: Mountain
   landscapePrefab: {fileID: 6370684055282604598, guid: a7a02566874361843a03859cbbefc5f5, type: 3}
   maxBuildingLimit: 1

@@ -25,6 +25,11 @@ MonoBehaviour:
     weight: -0.05
   - target: {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
     weight: 0.1
+  resourceProbabilities:
+  - resource: {fileID: 11400000, guid: b2924cb91b8bc8c4ba6aac8a3595e607, type: 2}
+    probability: 0.1
+  - resource: {fileID: 11400000, guid: 7715d6adcdf54174b9e2a9435024b078, type: 2}
+    probability: 0.05
   landscapeName: Desert
   landscapePrefab: {fileID: 521354347065820335, guid: 4062e23622eb31044bbba8a4b0cadb60, type: 3}
   maxBuildingLimit: 4

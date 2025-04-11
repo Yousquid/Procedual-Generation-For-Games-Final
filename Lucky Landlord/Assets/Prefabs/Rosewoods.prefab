@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8796129615389822982}
   - component: {fileID: 8291987748714767630}
   m_Layer: 0
-  m_Name: Woods
+  m_Name: Rosewoods
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4919786761339662777}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1236.207, y: 1041.746, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []

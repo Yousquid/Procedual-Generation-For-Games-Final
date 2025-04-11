@@ -17,6 +17,9 @@ MonoBehaviour:
     weight: 0.1
   - target: {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
     weight: 0.05
+  resourceProbabilities:
+  - resource: {fileID: 11400000, guid: 9489a03809bc6c3488475e13ec4fbbb5, type: 2}
+    probability: 0.2
   landscapeName: Lake
   landscapePrefab: {fileID: 3331320863965997231, guid: f319250949626c7458658aa0574f7639, type: 3}
   maxBuildingLimit: 2
