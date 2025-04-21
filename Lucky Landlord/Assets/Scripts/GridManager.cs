@@ -321,5 +321,100 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private List<GameGridObject> GetNeighbors(int x, int y)
+    {
+        List<GameGridObject> neighbors = new List<GameGridObject>();
+        int[,] offsets = new int[,] { 
+        { -1,  0 }, // 左
+        {  1,  0 }, // 右
+        {  0, -1 }, // 下
+        {  0,  1 }, // 上
+        { -1, -1 }, // 左下
+        { -1,  1 }, // 左上
+        {  1, -1 }, // 右下
+        {  1,  1 }  };// 右上
+
+        for (int i = 0; i < offsets.GetLength(0); i++)
+        {
+            int nx = x + offsets[i, 0];
+            int ny = y + offsets[i, 1];
+
+            if (nx >= 0 && ny >= 0 && nx < grid.GetWidth() && ny < grid.GetHeight())
+            {
+                neighbors.Add(grid.GetGridObject(nx, ny));
+            }
+        }
+
+        return neighbors;
+    }
+
+    public int CalculateIncome(int x, int y)
+    {
+        GameGridObject gridObject = grid.GetGridObject(x, y);
+        int income = 0;
+
+        // 1. 基础收益
+        if (gridObject.landscape != null) income += gridObject.landscape.baseIncomeValue;
+        if (gridObject.resource != null) income += gridObject.resource.baseIncomeValue;
+        foreach (var building in gridObject.buildings)
+        {
+            income += building.baseIncomeValue;
+        }
+
+        // 2. 相邻格子获取
+        List<GameGridObject> neighbors = GetNeighbors(x, y);
+
+        foreach (GameGridObject neighbor in neighbors)
+        {
+            // 地形加成
+            if (gridObject.landscape != null &&
+                gridObject.landscape.bonusFromAdjacentLandscapes.Contains(neighbor.landscape))
+            {
+                income += gridObject.landscape.incomePerMatch;
+            }
+
+            // 建筑加成
+            foreach (var building in gridObject.buildings)
+            {
+                if (building.bonusFromAdjacentLandscapes.Contains(neighbor.landscape))
+                    income += building.incomePerMatch;
+
+                if (building.bonusFromAdjacentResources.Contains(neighbor.resource))
+                    income += building.incomePerMatch;
+
+                foreach (var bonusBuilding in building.bonusFromAdjacentBuildings)
+                {
+                    if (neighbor.buildings.Contains(bonusBuilding))
+                    {
+                        income += building.incomePerMatch;
+                    }
+                }
+            }
+        }
+
+        // 3. 邻居中具有翻倍效果的建筑（每种类型只生效一次）
+        HashSet<BuildingType> appliedDoubleTypes = new HashSet<BuildingType>();
+        foreach (var neighbor in neighbors)
+        {
+            foreach (var neighborBuilding in neighbor.buildings)
+            {
+                if (neighborBuilding.doublesAdjacentIncome &&
+                    !appliedDoubleTypes.Contains(neighborBuilding))
+                {
+                    income *= 2;
+                    appliedDoubleTypes.Add(neighborBuilding);
+                }
+            }
+        }
+
+        // 4. 自身资源翻倍效果
+        if (gridObject.resource != null && gridObject.resource.doubleGridIncome)
+        {
+            income *= 2;
+        }
+
+        return income;
+    }
+
 
 }

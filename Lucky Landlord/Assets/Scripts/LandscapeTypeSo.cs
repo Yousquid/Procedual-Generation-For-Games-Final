@@ -29,4 +29,8 @@ public class LandscapeTypeSo : ScriptableObject
     public int baseIncomeValue;
     public string specialEffectDescription;
     public float baseProbability;
+    public List<LandscapeTypeSo> bonusFromAdjacentLandscapes;
+    public List<ResourceTypeSo> bonusFromAdjacentResources;
+    public List<BuildingType> bonusFromAdjacentBuildings;
+    public int incomePerMatch;
 }

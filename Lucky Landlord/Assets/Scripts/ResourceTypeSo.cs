@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "ResourceTypeSo", menuName = "Scriptable Objects/ResourceTypeSo")]
 public class ResourceTypeSo : ScriptableObject
@@ -7,4 +9,10 @@ public class ResourceTypeSo : ScriptableObject
     public int baseIncomeValue;
     public GameObject resourcePrefab;
     public string specialEffectDescription;
+    public bool doubleGridIncome;
+    public List<LandscapeTypeSo> bonusFromAdjacentLandscapes;
+    public List<ResourceTypeSo> bonusFromAdjacentResources;
+    public List<BuildingType> bonusFromAdjacentBuildings;
+    public int incomePerMatch;
+
 }
