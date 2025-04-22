@@ -13,6 +13,8 @@ public class ResourceTypeSo : ScriptableObject
     public List<LandscapeTypeSo> bonusFromAdjacentLandscapes;
     public List<ResourceTypeSo> bonusFromAdjacentResources;
     public List<BuildingType> bonusFromAdjacentBuildings;
+    public List<LandscapeTypeSo> canDoubleIncomeLandscapes;
+    public List<BuildingType> canDoubleIncomeBuildings;
     public int incomePerMatch;
 
 }

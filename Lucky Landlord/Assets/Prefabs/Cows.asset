@@ -17,3 +17,13 @@ MonoBehaviour:
   resourcePrefab: {fileID: 1880129346638833456, guid: 399a77dc4079d714e92ae08e7c40d567, type: 3}
   specialEffectDescription: Double the income of this grid if this is on a Grass/Plain
     or with a Ranch.
+  doubleGridIncome: 1
+  bonusFromAdjacentLandscapes: []
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings: []
+  canDoubleIncomeLandscapes:
+  - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
+  - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
+  canDoubleIncomeBuildings:
+  - {fileID: 0}
+  incomePerMatch: 0

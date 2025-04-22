@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47616dbd749f2864bb223302e7227809, type: 3}
+  m_Name: Market
+  m_EditorClassIdentifier: 
+  buildingName: Market
+  baseIncomeValue: 2
+  buildingPrefab: {fileID: 0}
+  buildingTypeEnum: 8
+  buildingCategory: Enhancement
+  specialEffectDescription: incrase the income of this grid by 2 for each adjacent
+    grid with Production Building
+  bonusFromAdjacentLandscapes: []
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings:
+  - {fileID: 11400000, guid: 7f0d1d5113eb1354bb83f7b194d0eef6, type: 2}
+  - {fileID: 11400000, guid: 362d370df461eeb498ee3556fb1f0e44, type: 2}
+  - {fileID: 11400000, guid: ed90c390928fabb45b6d2755071d5576, type: 2}
+  - {fileID: 11400000, guid: fa3fa41c92bee4840a21fa33666d6d30, type: 2}
+  - {fileID: 11400000, guid: 660be67e43e59434da9fb2b6636b9664, type: 2}
+  - {fileID: 11400000, guid: 19f97ff295dd0c44087e4117ac96f434, type: 2}
+  - {fileID: 11400000, guid: 807ec1dd425743f49abf0e48157b9969, type: 2}
+  incomePerMatch: 2
+  doublesAdjacentIncome: 0

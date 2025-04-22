@@ -580,10 +580,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64014410963112f469029ea136fd5876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 18
-  height: 8
+  width: 17
+  height: 9
   cellSize: 1
-  originPosition: {x: -9, y: -4.5, z: 0}
+  originPosition: {x: -8.5, y: -4.7, z: 0}
   landscapeTypes:
   - {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}
   - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
@@ -595,6 +595,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
   resourceTypes: []
   buildingTypes: []
+  fogPrefab: {fileID: 8482319672287019591, guid: 0030a92ba5fefd64a928cdae984bc139, type: 3}
   gridParent: {fileID: 1517112020}
 --- !u!4 &978205595
 Transform:

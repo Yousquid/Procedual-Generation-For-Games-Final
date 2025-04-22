@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 
 
+
 public class GridManager : MonoBehaviour
 {
     [Header("Grid Settings")]
@@ -23,6 +24,8 @@ public class GridManager : MonoBehaviour
     private Grid<GameGridObject> grid;
 
     private Dictionary<Vector2Int, Transform> cellParents = new Dictionary<Vector2Int, Transform>();
+
+    public GameObject fogPrefab;
 
     [SerializeField] private Transform gridParent; 
 
@@ -54,6 +57,7 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         InitializeGrid();
+        InitializeFogOfWar();
         GenerateResources();
         VisualizeGrid();
     }
@@ -119,7 +123,23 @@ public class GridManager : MonoBehaviour
             }
         }
     }
-
+    public void RevealFogOfWar(Vector2Int center, int radius)
+    {
+        for (int x = center.x - radius; x <= center.x + radius; x++)
+        {
+            for (int y = center.y - radius; y <= center.y + radius; y++)
+            {
+                
+                    GameGridObject cell = grid.GetGridObject(x, y);
+                    if (cell.hasFogOfWar)
+                    {
+                        cell.hasFogOfWar = false;
+                        grid.TriggerGridObjectChanged(x, y);
+                    }
+                
+            }
+        }
+    }
     private void VisualizeGrid()
     {
         // 使用缓存系统避免重复生成
@@ -144,6 +164,8 @@ public class GridManager : MonoBehaviour
                 GameGridObject gridObj = grid.GetGridObject(x, y);
                 VisualizeTerrain(gridObj, cellParent);
                 VisualizeResource(gridObj, cellParent);
+                VisualizeFogOfWar(gridObj, cellParent); // 新增迷雾可视化
+
             }
         }
     }
@@ -156,6 +178,43 @@ public class GridManager : MonoBehaviour
             DestroyImmediate(parent.GetChild(i).gameObject);
         }
     }
+
+    private void InitializeFogOfWar()
+    {
+        int centerX = width / 2;
+        int centerY = height / 2;
+
+        // 设置中心4x4区域（适配不同尺寸）
+        int revealSize = 3;
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                bool isCenterArea =
+                    x >= centerX - revealSize / 2 &&
+                    x <= centerX + revealSize / 2 &&
+                    y >= centerY - revealSize / 2 &&
+                    y <= centerY + revealSize / 2;
+
+                grid.GetGridObject(x, y).hasFogOfWar = !isCenterArea;
+            }
+        }
+    }
+
+    private void VisualizeFogOfWar(GameGridObject gridObj, Transform parent)
+    {
+        if (gridObj.hasFogOfWar && fogPrefab != null)
+        {
+            GameObject fog = Instantiate(
+                fogPrefab,
+                parent.position,
+                Quaternion.identity,
+                parent
+            );
+
+        }
+    }
+
 
     private void OnGridChanged(int x, int y)
     {
@@ -408,7 +467,8 @@ public class GridManager : MonoBehaviour
         }
 
         // 4. 自身资源翻倍效果
-        if (gridObject.resource != null && gridObject.resource.doubleGridIncome)
+        if (gridObject.resource != null && gridObject.resource.doubleGridIncome && gridObject.resource.canDoubleIncomeLandscapes.Contains(gridObject.landscape)
+            && gridObject.resource.canDoubleIncomeBuildings.Any(b => gridObject.buildings.Contains(b)))
         {
             income *= 2;
         }
