@@ -427,7 +427,8 @@ public class GridManager : MonoBehaviour
         {
             // 地形加成
             if (gridObject.landscape != null &&
-                gridObject.landscape.bonusFromAdjacentLandscapes.Contains(neighbor.landscape))
+                gridObject.landscape.bonusFromAdjacentLandscapes.Contains(neighbor.landscape)
+                && neighbor.hasFogOfWar == false)
             {
                 income += gridObject.landscape.incomePerMatch;
             }
@@ -435,10 +436,10 @@ public class GridManager : MonoBehaviour
             // 建筑加成
             foreach (var building in gridObject.buildings)
             {
-                if (building.bonusFromAdjacentLandscapes.Contains(neighbor.landscape))
+                if (building.bonusFromAdjacentLandscapes.Contains(neighbor.landscape) && neighbor.hasFogOfWar == false)
                     income += building.incomePerMatch;
 
-                if (building.bonusFromAdjacentResources.Contains(neighbor.resource))
+                if (building.bonusFromAdjacentResources.Contains(neighbor.resource) && neighbor.hasFogOfWar == false)
                     income += building.incomePerMatch;
 
                 foreach (var bonusBuilding in building.bonusFromAdjacentBuildings)
@@ -476,5 +477,40 @@ public class GridManager : MonoBehaviour
         return income;
     }
 
+    public Dictionary<Vector2Int, int> GetCalculateAllIncomeWithoutFogMap()
+    {
+        Dictionary<Vector2Int, int> incomeMap = new Dictionary<Vector2Int, int>();
 
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameGridObject gridObject = grid.GetGridObject(x, y);
+                if (gridObject.hasFogOfWar) continue;
+
+                int income = CalculateIncome(x, y);
+                incomeMap[new Vector2Int(x, y)] = income;
+            }
+        }
+
+        return incomeMap;
+    }
+
+    public int GetAllIncomeValue()
+    {
+        int totalIncome = 0;
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                GameGridObject gridObject = grid.GetGridObject(x, y);
+                if (gridObject.hasFogOfWar) continue;
+
+                totalIncome += CalculateIncome(x, y);
+            }
+        }
+
+        return totalIncome;
+    }
 }
