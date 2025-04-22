@@ -34,5 +34,9 @@ MonoBehaviour:
   landscapePrefab: {fileID: 521354347065820335, guid: 4062e23622eb31044bbba8a4b0cadb60, type: 3}
   maxBuildingLimit: 4
   baseIncomeValue: 0
-  specialEffectDescription: Double the income of this grid
+  specialEffectDescription: 0
   baseProbability: 0.085
+  bonusFromAdjacentLandscapes: []
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings: []
+  incomePerMatch: 0

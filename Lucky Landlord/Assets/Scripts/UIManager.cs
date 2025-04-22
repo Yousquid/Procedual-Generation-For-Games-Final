@@ -4,8 +4,9 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshProUGUI incomeText;
     public GridManager gridManager;
+    public TextMeshProUGUI wealthText;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -15,6 +16,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        incomeText.text = "Total Income:" + gridManager.GetAllIncomeValue();
+        wealthText.text = "Wealth:" + GridManager.wealth + "+ " + gridManager.GetAllIncomeValue();
     }
+
+
 }

@@ -16,3 +16,11 @@ MonoBehaviour:
   baseIncomeValue: 1
   resourcePrefab: {fileID: 7185810395522308503, guid: c64febbd1e64db747b957ad0dc28b3c3, type: 3}
   specialEffectDescription: Double the income of this grid.
+  doubleGridIncome: 1
+  bonusFromAdjacentLandscapes: []
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings: []
+  canDoubleIncomeLandscapes:
+  - {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
+  canDoubleIncomeBuildings: []
+  incomePerMatch: 0

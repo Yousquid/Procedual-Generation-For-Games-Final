@@ -17,3 +17,12 @@ MonoBehaviour:
   resourcePrefab: {fileID: 1484935245278540889, guid: e5cae5f4ab3239149930e054998d30af, type: 3}
   specialEffectDescription: Double the income of this grid if this is on a Mountain
     or Hill Landscape.
+  doubleGridIncome: 1
+  bonusFromAdjacentLandscapes: []
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings: []
+  canDoubleIncomeLandscapes:
+  - {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
+  - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
+  canDoubleIncomeBuildings: []
+  incomePerMatch: 0

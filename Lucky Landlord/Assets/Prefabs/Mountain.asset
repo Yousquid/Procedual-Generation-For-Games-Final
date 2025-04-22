@@ -37,3 +37,8 @@ MonoBehaviour:
   specialEffectDescription: Increase the income of this grid by 3 for each adjacent
     Mountain Landscape.
   baseProbability: 0.1
+  bonusFromAdjacentLandscapes:
+  - {fileID: 11400000}
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings: []
+  incomePerMatch: 3

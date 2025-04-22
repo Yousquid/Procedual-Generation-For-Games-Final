@@ -17,3 +17,10 @@ MonoBehaviour:
   resourcePrefab: {fileID: 4919786761339662777, guid: de32b1bd43fe5d548ace48925cd9af90, type: 3}
   specialEffectDescription: Double the income of this grid if this is on a Forrest
     Landscape.
+  doubleGridIncome: 1
+  bonusFromAdjacentLandscapes: []
+  bonusFromAdjacentResources: []
+  bonusFromAdjacentBuildings: []
+  canDoubleIncomeLandscapes: []
+  canDoubleIncomeBuildings: []
+  incomePerMatch: 0

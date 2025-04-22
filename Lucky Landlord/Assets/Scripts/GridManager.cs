@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
-
+using TMPro;
+using static GridBuildingSystem2D;
 
 
 
@@ -27,8 +28,14 @@ public class GridManager : MonoBehaviour
 
     public GameObject fogPrefab;
 
-    [SerializeField] private Transform gridParent; 
+    public static int wealth = 0;
 
+    [SerializeField] private Camera mainCamera;
+
+    [SerializeField] private Transform gridParent;
+
+    [SerializeField] private GameObject incomeTextPrefab; // 拖入TextMeshPro预制体
+    private Dictionary<Vector2Int, TextMeshPro> incomeTexts = new Dictionary<Vector2Int, TextMeshPro>();
 
     public class GameGridObject
     {
@@ -140,6 +147,8 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+
+    
     private void VisualizeGrid()
     {
         // 使用缓存系统避免重复生成
@@ -165,6 +174,7 @@ public class GridManager : MonoBehaviour
                 VisualizeTerrain(gridObj, cellParent);
                 VisualizeResource(gridObj, cellParent);
                 VisualizeFogOfWar(gridObj, cellParent); // 新增迷雾可视化
+                UpdateIncomeVisuals();
 
             }
         }
@@ -378,6 +388,8 @@ public class GridManager : MonoBehaviour
         {
             VisualizeGrid();
         }
+
+        ClickAndRevealFogCheck();
     }
 
     private List<GameGridObject> GetNeighbors(int x, int y)
@@ -469,12 +481,16 @@ public class GridManager : MonoBehaviour
 
         // 4. 自身资源翻倍效果
         if (gridObject.resource != null && gridObject.resource.doubleGridIncome && gridObject.resource.canDoubleIncomeLandscapes.Contains(gridObject.landscape)
-            && gridObject.resource.canDoubleIncomeBuildings.Any(b => gridObject.buildings.Contains(b)))
+            )
+        {
+            income *= 2;
+        }
+        else if (gridObject.resource != null && gridObject.resource.doubleGridIncome && gridObject.resource.canDoubleIncomeBuildings.Any(b => gridObject.buildings.Contains(b)))
         {
             income *= 2;
         }
 
-        return income;
+            return income;
     }
 
     public Dictionary<Vector2Int, int> GetCalculateAllIncomeWithoutFogMap()
@@ -495,7 +511,10 @@ public class GridManager : MonoBehaviour
 
         return incomeMap;
     }
-
+    public bool IsValidGridPosition(int x, int y)
+    {
+        return x >= 0 && y >= 0 && x < width && y < height;
+    }
     public int GetAllIncomeValue()
     {
         int totalIncome = 0;
@@ -512,5 +531,72 @@ public class GridManager : MonoBehaviour
         }
 
         return totalIncome;
+    }
+
+    private void UpdateIncomeVisuals()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Vector2Int pos = new Vector2Int(x, y);
+                GameGridObject gridObj = grid.GetGridObject(x, y);
+
+                if (gridObj.hasFogOfWar) continue;
+
+                int income = CalculateIncome(x, y);
+
+                if (!incomeTexts.ContainsKey(pos))
+                {
+                    GameObject textObj = Instantiate(
+                        incomeTextPrefab,
+                        grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f + 0.2f),
+                        Quaternion.identity,
+                        gridParent // 挂在格子父节点下，便于管理
+                    );
+
+                    TextMeshPro text = textObj.GetComponent<TextMeshPro>();
+                    incomeTexts[pos] = text;
+                }
+
+                incomeTexts[pos].text = $"+{income}";
+            }
+        }
+    }
+
+
+    private void ClickAndRevealFogCheck()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            int x = 0;
+            int y = 0;
+            Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouseWorldPos2D = new Vector2(mouseWorldPos.x, mouseWorldPos.y);
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos2D, Vector2.zero);
+            if (hit.collider != null)
+            {
+                Vector3 worldPos = hit.point;
+                print(worldPos);
+                grid.GetXY(worldPos,out x, out y);
+
+                if (IsValidGridPosition(x, y))
+                {
+                    GameGridObject gridObject = grid.GetGridObject(x, y);
+
+                    if (gridObject.hasFogOfWar)
+                    {
+                        gridObject.hasFogOfWar = false;
+                        grid.TriggerGridObjectChanged(x, y);
+                        VisualizeGrid();
+                    }
+                }
+
+            }
+
+            
+
+            
+        }
     }
 }

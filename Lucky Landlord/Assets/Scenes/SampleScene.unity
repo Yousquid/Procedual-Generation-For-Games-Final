@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 291486972}
   - component: {fileID: 291486971}
   m_Layer: 5
-  m_Name: IncomeText
+  m_Name: WealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,9 @@ MonoBehaviour:
   resourceTypes: []
   buildingTypes: []
   fogPrefab: {fileID: 8482319672287019591, guid: 0030a92ba5fefd64a928cdae984bc139, type: 3}
+  mainCamera: {fileID: 519420031}
   gridParent: {fileID: 1517112020}
+  incomeTextPrefab: {fileID: 5505254956279835713, guid: 0fa18f45060a0c541a99bbe0aef8ccef, type: 3}
 --- !u!4 &978205595
 Transform:
   m_ObjectHideFlags: 0
@@ -761,8 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a916184b2a783804f852773f11c3cc3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  incomeText: {fileID: 291486971}
   gridManager: {fileID: 978205594}
+  wealthText: {fileID: 291486971}
 --- !u!1 &983548652
 GameObject:
   m_ObjectHideFlags: 0
