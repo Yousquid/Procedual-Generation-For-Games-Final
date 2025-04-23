@@ -28,7 +28,13 @@ public class GridManager : MonoBehaviour
 
     public GameObject fogPrefab;
 
-    private BuildingType selectedBuilding;
+    public BuildingType selectedBuilding;
+    public ResourceTypeSo selectedResource;
+
+    public enum MouseMode { PlaceBuilding, PlaceResource, ExplorationMap }
+    public MouseMode currentMode = MouseMode.PlaceBuilding;
+    private GameObject currentGhostObject;
+    private Vector2Int? currentGhostGridPos = null;
 
     public static int wealth = 0;
 
@@ -423,6 +429,7 @@ public class GridManager : MonoBehaviour
         }
 
         ClickAndRevealFogCheck();
+        BuildingModeGhostObjectPreview();
     }
 
     private List<GameGridObject> GetNeighbors(int x, int y)
@@ -636,7 +643,7 @@ public class GridManager : MonoBehaviour
 
     private void ClickAndRevealFogCheck()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) &&  currentMode == MouseMode.ExplorationMap)
         {
             int x = 0;
             int y = 0;
@@ -662,9 +669,6 @@ public class GridManager : MonoBehaviour
                 }
 
             }
-
-            
-
             
         }
     }
@@ -678,6 +682,11 @@ public class GridManager : MonoBehaviour
         if (selectedBuilding.allowedLandscapes != null && !selectedBuilding.allowedLandscapes.Contains(gridObject.landscape))
         {
             Debug.Log($"Cannot place {selectedBuilding.buildingName} on {gridObject.landscape.name}.");
+            return;
+        }
+
+        if (gridObject.buildings != null && gridObject.buildings[0] != null)
+        {
             return;
         }
 
@@ -715,6 +724,99 @@ public class GridManager : MonoBehaviour
                 return;
         }
 
+        gridObject.buildings.Add(selectedBuilding);
+        grid.TriggerGridObjectChanged(x, y);
+        VisualizeGrid();
+    }
 
+    private void PlaceResource(int x, int y)
+    {
+        var gridObject = grid.GetGridObject(x, y);
+
+        if (gridObject.hasFogOfWar || gridObject.resource == selectedResource) return;
+
+        if (selectedResource.allowedLandscapes != null && !selectedResource.allowedLandscapes.Contains(gridObject.landscape))
+        {
+            Debug.Log($"Cannot place {selectedBuilding.buildingName} on {gridObject.landscape.name}.");
+            return;
+        }
+
+        if (gridObject.resource != null)
+        {
+            return;
+        }
+
+        gridObject.resource = selectedResource;
+        grid.TriggerGridObjectChanged(x, y);
+        VisualizeGrid();
+
+    }
+
+    private void BuildingModeGhostObjectPreview()
+    {
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = 0f;
+        grid.GetXY(mouseWorldPos, out int x, out int y);
+
+        if (IsValidGridPosition(x,y))
+        {
+            Vector2Int gridPos = new Vector2Int(x, y);
+
+            // 如果位置没变则不需要更新
+            if (currentGhostGridPos != null && currentGhostGridPos.Value == gridPos) return;
+
+            currentGhostGridPos = gridPos;
+            Vector3 cellCenter = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f) + new Vector3(0,-0.2F,0);//有一个小的向下的offset
+
+            // 如果已有 ghostObject 就移动它，否则创建一个新的
+            if (currentGhostObject != null)
+            {
+                currentGhostObject.transform.position = cellCenter;
+            }
+            else
+            {
+                GameObject prefabToUse = null;
+
+                if (selectedBuilding != null && currentMode == MouseMode.PlaceBuilding)
+                {
+                    prefabToUse = selectedBuilding.buildingPrefab;
+                }
+                else if (selectedResource != null && currentMode == MouseMode.PlaceResource)
+                {
+                    prefabToUse = selectedResource.resourcePrefab;
+                }
+
+                if (prefabToUse != null)
+                {
+                    currentGhostObject = Instantiate(prefabToUse, cellCenter, Quaternion.identity);
+                    SetGhostStyle(currentGhostObject);
+                }
+            }
+        }
+        else
+        {
+            // 鼠标不在有效区域，隐藏 ghost
+            if (currentGhostObject != null)
+            {
+                Destroy(currentGhostObject);
+                currentGhostObject = null;
+                currentGhostGridPos = null;
+            }
+        }
+    }
+
+    private void SetGhostStyle(GameObject ghost)
+    {
+        foreach (var renderer in ghost.GetComponentsInChildren<SpriteRenderer>())
+        {
+            Color color = renderer.color;
+            color.a = 0.5f; // 半透明
+            renderer.color = color;
+        }
+
+        foreach (var collider in ghost.GetComponentsInChildren<Collider2D>())
+        {
+            collider.enabled = false;
+        }
     }
 }
