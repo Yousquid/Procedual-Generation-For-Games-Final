@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -43,7 +43,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private Transform gridParent;
 
-    [SerializeField] private GameObject incomeTextPrefab; // ÍÏÈëTextMeshProÔ¤ÖÆÌå
+    [SerializeField] private GameObject incomeTextPrefab; // æ‹–å…¥TextMeshProé¢„åˆ¶ä½“
     private Dictionary<Vector2Int, TextMeshPro> incomeTexts = new Dictionary<Vector2Int, TextMeshPro>();
 
     public class GameGridObject
@@ -61,7 +61,7 @@ public class GridManager : MonoBehaviour
             this.resource = resource;
             this.buildings = new List<BuildingType>();
             productionOutput = 0;
-            hasFogOfWar = true; // ³õÊ¼Ä¬ÈÏÓĞÕ½ÕùÃÔÎí
+            hasFogOfWar = true; // åˆå§‹é»˜è®¤æœ‰æˆ˜äº‰è¿·é›¾
         }
 
         public override string ToString()
@@ -160,7 +160,7 @@ public class GridManager : MonoBehaviour
     
     private void VisualizeGrid()
     {
-        // Ê¹ÓÃ»º´æÏµÍ³±ÜÃâÖØ¸´Éú³É
+        // ä½¿ç”¨ç¼“å­˜ç³»ç»Ÿé¿å…é‡å¤ç”Ÿæˆ
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -168,22 +168,22 @@ public class GridManager : MonoBehaviour
                 Vector2Int gridPos = new Vector2Int(x, y);
                 Vector3 worldPos = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2, cellSize / 2);
 
-                // »ñÈ¡»ò´´½¨¸¸ÎïÌå
+                // è·å–æˆ–åˆ›å»ºçˆ¶ç‰©ä½“
                 if (!cellParents.TryGetValue(gridPos, out Transform cellParent))
                 {
                     cellParent = CreateCellParent(x, y, worldPos);
                     cellParents.Add(gridPos, cellParent);
                 }
 
-                // Çå³ı¾ÉµÄ¿ÉÊÓ»¯ÄÚÈİ
+                // æ¸…é™¤æ—§çš„å¯è§†åŒ–å†…å®¹
                 ClearCellVisualization(cellParent);
 
-                // Éú³ÉĞÂÄÚÈİ
+                // ç”Ÿæˆæ–°å†…å®¹
                 GameGridObject gridObj = grid.GetGridObject(x, y);
                 VisualizeTerrain(gridObj, cellParent);
                 VisualizeResource(gridObj, cellParent);
                 VisualizeBuilding(gridObj, cellParent);
-                VisualizeFogOfWar(gridObj, cellParent); // ĞÂÔöÃÔÎí¿ÉÊÓ»¯
+                VisualizeFogOfWar(gridObj, cellParent); // æ–°å¢è¿·é›¾å¯è§†åŒ–
                 UpdateIncomeVisuals();
 
             }
@@ -192,7 +192,7 @@ public class GridManager : MonoBehaviour
 
     private void ClearCellVisualization(Transform parent)
     {
-        // Ê¹ÓÃµ¹Ğò±éÀú±ÜÃâĞŞ¸Ä¼¯ºÏÎÊÌâ
+        // ä½¿ç”¨å€’åºéå†é¿å…ä¿®æ”¹é›†åˆé—®é¢˜
         for (int i = parent.childCount - 1; i >= 0; i--)
         {
             DestroyImmediate(parent.GetChild(i).gameObject);
@@ -204,7 +204,7 @@ public class GridManager : MonoBehaviour
         int centerX = width / 2;
         int centerY = height / 2;
 
-        // ÉèÖÃÖĞĞÄ4x4ÇøÓò£¨ÊÊÅä²»Í¬³ß´ç£©
+        // è®¾ç½®ä¸­å¿ƒ4x4åŒºåŸŸï¼ˆé€‚é…ä¸åŒå°ºå¯¸ï¼‰
         int revealSize = 3;
         for (int x = 0; x < width; x++)
         {
@@ -266,7 +266,7 @@ public class GridManager : MonoBehaviour
                 parent
             );
             terrain.name = "Terrain";
-            SetSortingOrder(terrain, 0); // µØĞÎÔÚ×îµ×²ã
+            SetSortingOrder(terrain, 0); // åœ°å½¢åœ¨æœ€åº•å±‚
         }
     }
 
@@ -282,9 +282,9 @@ public class GridManager : MonoBehaviour
                 parent
             );
             resource.name = "Resource";
-            SetSortingOrder(resource, 3); // ×ÊÔ´ÔÚ¶¥²ã
+            SetSortingOrder(resource, 3); // èµ„æºåœ¨é¡¶å±‚
 
-            // Ìí¼Ó×ÊÔ´¶¯»­£¨¿ÉÑ¡£©
+            // æ·»åŠ èµ„æºåŠ¨ç”»ï¼ˆå¯é€‰ï¼‰
             if (resource.TryGetComponent<Animator>(out var anim))
             {
                 anim.Play("ResourceIdle");
@@ -297,12 +297,12 @@ public class GridManager : MonoBehaviour
         if (gridObj.buildings == null || gridObj.buildings.Count == 0)
             return;
 
-        // ´´½¨½¨ÖşÈİÆ÷
+        // åˆ›å»ºå»ºç­‘å®¹å™¨
         GameObject buildingContainer = new GameObject("Buildings");
         buildingContainer.transform.SetParent(parent);
         buildingContainer.transform.localPosition = Vector3.zero;
 
-        // ±éÀúËùÓĞ½¨Öş
+        // éå†æ‰€æœ‰å»ºç­‘
         for (int i = 0; i < gridObj.buildings.Count; i++)
         {
             BuildingType buildingType = gridObj.buildings[i];
@@ -317,7 +317,7 @@ public class GridManager : MonoBehaviour
             );
             building.name = $"Building_{buildingType.name}_{i}";
 
-            // ÉèÖÃ²ã¼¶£¨½¨ÖşÔÚ×ÊÔ´Ö®ÉÏ£¬ÃÔÎíÖ®ÏÂ£©
+            // è®¾ç½®å±‚çº§ï¼ˆå»ºç­‘åœ¨èµ„æºä¹‹ä¸Šï¼Œè¿·é›¾ä¹‹ä¸‹ï¼‰
             SetSortingOrder(building, 2);
         }
     }
@@ -330,7 +330,7 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // ĞŞ¸ÄºóµÄ×ÊÔ´Éú³É·½·¨£¨Ìí¼Ó¿ÉÊÓ»¯±ê¼Ç£©
+    // ä¿®æ”¹åçš„èµ„æºç”Ÿæˆæ–¹æ³•ï¼ˆæ·»åŠ å¯è§†åŒ–æ ‡è®°ï¼‰
     private void GenerateResources()
     {
         for (int x = 0; x < width; x++)
@@ -338,7 +338,7 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 GameGridObject cell = grid.GetGridObject(x, y);
-                // Çå³ı¾É×ÊÔ´£¨Èç¹ûĞèÒªÖØĞÂÉú³É£©
+                // æ¸…é™¤æ—§èµ„æºï¼ˆå¦‚æœéœ€è¦é‡æ–°ç”Ÿæˆï¼‰
                 cell.resource = null;
 
                 LandscapeTypeSo landscape = cell.landscape;
@@ -346,7 +346,7 @@ public class GridManager : MonoBehaviour
                     landscape.resourceProbabilities.Count == 0)
                     continue;
 
-                // Ê¹ÓÃ¸ü¾«È·µÄ¸ÅÂÊËã·¨
+                // ä½¿ç”¨æ›´ç²¾ç¡®çš„æ¦‚ç‡ç®—æ³•
                 float totalWeight = 1 + landscape.resourceProbabilities
                     .Sum(r => r.probability);
 
@@ -361,7 +361,7 @@ public class GridManager : MonoBehaviour
                     if (rnd <= cumulative && rp.resource != null)
                     {
                         cell.resource = rp.resource;
-                        grid.TriggerGridObjectChanged(x, y); // Í¨ÖªË¢ĞÂÏÔÊ¾
+                        grid.TriggerGridObjectChanged(x, y); // é€šçŸ¥åˆ·æ–°æ˜¾ç¤º
                         break;
                     }
                 }
@@ -438,14 +438,14 @@ public class GridManager : MonoBehaviour
     {
         List<GameGridObject> neighbors = new List<GameGridObject>();
         int[,] offsets = new int[,] { 
-        { -1,  0 }, // ×ó
-        {  1,  0 }, // ÓÒ
-        {  0, -1 }, // ÏÂ
-        {  0,  1 }, // ÉÏ
-        { -1, -1 }, // ×óÏÂ
-        { -1,  1 }, // ×óÉÏ
-        {  1, -1 }, // ÓÒÏÂ
-        {  1,  1 }  };// ÓÒÉÏ
+        { -1,  0 }, // å·¦
+        {  1,  0 }, // å³
+        {  0, -1 }, // ä¸‹
+        {  0,  1 }, // ä¸Š
+        { -1, -1 }, // å·¦ä¸‹
+        { -1,  1 }, // å·¦ä¸Š
+        {  1, -1 }, // å³ä¸‹
+        {  1,  1 }  };// å³ä¸Š
 
         for (int i = 0; i < offsets.GetLength(0); i++)
         {
@@ -465,15 +465,15 @@ public class GridManager : MonoBehaviour
     {
         List<GameGridObject> neighbors = new List<GameGridObject>();
         int[,] offsets = new int[,] {
-        { -1,  0 }, // ×ó
-        {  1,  0 }, // ÓÒ
-        {  0, -1 }, // ÏÂ
-        {  0,  1 }, // ÉÏ
-        { -1, -1 }, // ×óÏÂ
-        { -1,  1 }, // ×óÉÏ
-        {  1, -1 }, // ÓÒÏÂ
+        { -1,  0 }, // å·¦
+        {  1,  0 }, // å³
+        {  0, -1 }, // ä¸‹
+        {  0,  1 }, // ä¸Š
+        { -1, -1 }, // å·¦ä¸‹
+        { -1,  1 }, // å·¦ä¸Š
+        {  1, -1 }, // å³ä¸‹
         {  1,  1 },
-        { 0,0} };// ÓÒÉÏ
+        { 0,0} };// å³ä¸Š
 
         for (int i = 0; i < offsets.GetLength(0); i++)
         {
@@ -494,7 +494,7 @@ public class GridManager : MonoBehaviour
         GameGridObject gridObject = grid.GetGridObject(x, y);
         int income = 0;
 
-        // 1. »ù´¡ÊÕÒæ
+        // 1. åŸºç¡€æ”¶ç›Š
         if (gridObject.landscape != null) income += gridObject.landscape.baseIncomeValue;
         if (gridObject.resource != null) income += gridObject.resource.baseIncomeValue;
         foreach (var building in gridObject.buildings)
@@ -502,12 +502,12 @@ public class GridManager : MonoBehaviour
             income += building.baseIncomeValue;
         }
 
-        // 2. ÏàÁÚ¸ñ×Ó»ñÈ¡
+        // 2. ç›¸é‚»æ ¼å­è·å–
         List<GameGridObject> neighbors = GetNeighbors(x, y);
 
         foreach (GameGridObject neighbor in neighbors)
         {
-            // µØĞÎ¼Ó³É
+            // åœ°å½¢åŠ æˆ
             if (gridObject.landscape != null &&
                 gridObject.landscape.bonusFromAdjacentLandscapes.Contains(neighbor.landscape)
                 && neighbor.hasFogOfWar == false)
@@ -520,7 +520,7 @@ public class GridManager : MonoBehaviour
 
         List<GameGridObject> neighborsIncludingSelf = GetNeighborsIncludingSelf(x, y);
 
-        // ½¨Öş¼Ó³É
+        // å»ºç­‘åŠ æˆ
         foreach (GameGridObject neighbor in neighborsIncludingSelf)
         {
             foreach (var building in gridObject.buildings)
@@ -542,7 +542,7 @@ public class GridManager : MonoBehaviour
         }
         
 
-        // 3. ÁÚ¾ÓÖĞ¾ßÓĞ·­±¶Ğ§¹ûµÄ½¨Öş£¨Ã¿ÖÖÀàĞÍÖ»ÉúĞ§Ò»´Î£©
+        // 3. é‚»å±…ä¸­å…·æœ‰ç¿»å€æ•ˆæœçš„å»ºç­‘ï¼ˆæ¯ç§ç±»å‹åªç”Ÿæ•ˆä¸€æ¬¡ï¼‰
         HashSet<BuildingType> appliedDoubleTypes = new HashSet<BuildingType>();
         foreach (var neighbor in neighbors)
         {
@@ -557,7 +557,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        // 4. ×ÔÉí×ÊÔ´·­±¶Ğ§¹û
+        // 4. è‡ªèº«èµ„æºç¿»å€æ•ˆæœ
         if (gridObject.resource != null && gridObject.resource.doubleGridIncome && gridObject.resource.canDoubleIncomeLandscapes.Contains(gridObject.landscape)
             )
         {
@@ -630,7 +630,7 @@ public class GridManager : MonoBehaviour
                         incomeTextPrefab,
                         grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f + 0.2f),
                         Quaternion.identity,
-                        gridParent // ¹ÒÔÚ¸ñ×Ó¸¸½ÚµãÏÂ£¬±ãÓÚ¹ÜÀí
+                        gridParent // æŒ‚åœ¨æ ¼å­çˆ¶èŠ‚ç‚¹ä¸‹ï¼Œä¾¿äºç®¡ç†
                     );
 
                     TextMeshPro text = textObj.GetComponent<TextMeshPro>();
@@ -761,55 +761,48 @@ public class GridManager : MonoBehaviour
         grid.GetXY(mouseWorldPos, out int x, out int y);
         GameGridObject gridObject = grid.GetGridObject(x, y);
 
+        // åªåœ¨æ˜¾ç¤ºæ—¶æ·»åŠ åç§»ï¼
+        Vector3 visualOffset = Vector3.zero;
+        if (currentMode == MouseMode.PlaceBuilding)
+        {
+            visualOffset = new Vector3(0, -0.17f, 0); // æ›´å»ºè®®ç”¨ Y è½´åç§»
+        }
+
         if (IsValidGridPosition(x, y) && !gridObject.hasFogOfWar)
         {
             Vector2Int gridPos = new Vector2Int(x, y);
 
-            // Èç¹ûÎ»ÖÃÃ»±äÔò²»ĞèÒª¸üĞÂ
+            // ğŸ”¸é€»è¾‘åæ ‡æ¯”è¾ƒä¸åŠ åç§»
             if (currentGhostGridPos != null && currentGhostGridPos.Value == gridPos) return;
 
             currentGhostGridPos = gridPos;
-            
-            Vector3  cellCenter = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f); 
-                
 
-            // Èç¹ûÒÑÓĞ ghostObject ¾ÍÒÆ¶¯Ëü£¬·ñÔò´´½¨Ò»¸öĞÂµÄ
+            // çœŸå®ä½ç½® + æ˜¾ç¤ºåç§»
+            Vector3 cellCenter = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f, 0f);
+            Vector3 displayPosition = cellCenter + visualOffset;
+
             if (currentGhostObject != null)
             {
-                currentGhostObject.transform.position = cellCenter;
+                currentGhostObject.transform.position = displayPosition;
             }
             else
             {
                 GameObject prefabToUse = null;
 
                 if (selectedBuilding != null && currentMode == MouseMode.PlaceBuilding)
-                {
                     prefabToUse = selectedBuilding.buildingPrefab;
-                }
-                if (selectedResource != null && currentMode == MouseMode.PlaceResource)
-                {
-                    
+                else if (selectedResource != null && currentMode == MouseMode.PlaceResource)
                     prefabToUse = selectedResource.resourcePrefab;
-                }
 
                 if (prefabToUse != null)
                 {
-                    if (selectedBuilding != null && currentMode == MouseMode.PlaceBuilding)
-                    {
-                        currentGhostObject = Instantiate(prefabToUse, cellCenter + new Vector3(0, 0, -0.17f), Quaternion.identity);
-                        SetGhostStyle(currentGhostObject);
-                    }
-                    else
-                    {
-                        currentGhostObject = Instantiate(prefabToUse, cellCenter, Quaternion.identity);
-                        SetGhostStyle(currentGhostObject);
-                    }
+                    currentGhostObject = Instantiate(prefabToUse, displayPosition, Quaternion.identity);
+                    SetGhostStyle(currentGhostObject);
                 }
             }
         }
         else
         {
-            // Êó±ê²»ÔÚÓĞĞ§ÇøÓò£¬Òş²Ø ghost
             if (currentGhostObject != null)
             {
                 Destroy(currentGhostObject);
@@ -818,6 +811,7 @@ public class GridManager : MonoBehaviour
             }
         }
     }
+
 
 
     private void ClearGhostObject()
@@ -835,7 +829,7 @@ public class GridManager : MonoBehaviour
         foreach (var renderer in ghost.GetComponentsInChildren<SpriteRenderer>())
         {
             Color color = renderer.color;
-            color.a = 0.5f; // °ëÍ¸Ã÷
+            color.a = 0.5f; // åŠé€æ˜
             renderer.color = color;
         }
 
