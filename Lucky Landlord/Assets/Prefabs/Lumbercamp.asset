@@ -24,5 +24,12 @@ MonoBehaviour:
   bonusFromAdjacentResources:
   - {fileID: 11400000, guid: d3354a8e9edc8674ca35053b04486169, type: 2}
   bonusFromAdjacentBuildings: []
+  allowedLandscapes:
+  - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
+  allowedResources:
+  - {fileID: 11400000, guid: d3354a8e9edc8674ca35053b04486169, type: 2}
+  allowedBuildings: []
+  mustHaveBuildings: []
+  mustHaveLandscapes: []
   incomePerMatch: 2
   doublesAdjacentIncome: 0

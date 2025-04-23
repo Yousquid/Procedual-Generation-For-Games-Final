@@ -19,7 +19,11 @@ public class BuildingType : ScriptableObject
     public List<LandscapeTypeSo> bonusFromAdjacentLandscapes;
     public List<ResourceTypeSo> bonusFromAdjacentResources;
     public List<BuildingType> bonusFromAdjacentBuildings;
-    public List<LandscapeTypeSo> allowedLandscapes; 
+    public List<LandscapeTypeSo> allowedLandscapes;
+    public List<ResourceTypeSo> allowedResources;
+    public List<BuildingType> allowedBuildings;
+    public List<BuildingType> mustHaveBuildings;
+    public List<LandscapeTypeSo> mustHaveLandscapes;
     public int incomePerMatch;
     public bool doublesAdjacentIncome;
 }

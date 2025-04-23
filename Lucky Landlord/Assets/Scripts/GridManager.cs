@@ -28,6 +28,8 @@ public class GridManager : MonoBehaviour
 
     public GameObject fogPrefab;
 
+    private BuildingType selectedBuilding;
+
     public static int wealth = 0;
 
     [SerializeField] private Camera mainCamera;
@@ -634,5 +636,54 @@ public class GridManager : MonoBehaviour
 
             
         }
+    }
+
+    private void PlaceBuilding(int x, int y)
+    {
+        var gridObject = grid.GetGridObject(x, y);
+
+        if (gridObject.hasFogOfWar || gridObject.buildings.Contains(selectedBuilding)) return;
+
+        if (selectedBuilding.allowedLandscapes != null && !selectedBuilding.allowedLandscapes.Contains(gridObject.landscape))
+        {
+            Debug.Log($"Cannot place {selectedBuilding.buildingName} on {gridObject.landscape.name}.");
+            return;
+        }
+
+        List<GameGridObject> neighbors = GetNeighbors(x, y);
+
+        List<LandscapeTypeSo> neightborsLandscapes = new List<LandscapeTypeSo>();
+        
+        List<BuildingType> neighborBuildings = new List<BuildingType>();
+
+        if (selectedBuilding.mustHaveLandscapes != null)
+        {
+            foreach (var neighbor in neighbors)
+            { 
+                neightborsLandscapes.Add(neighbor.landscape);
+            }
+
+            if (!selectedBuilding.mustHaveLandscapes.Any(b => neightborsLandscapes.Contains(b)))
+            {
+                return;
+            }
+        }
+
+        if (selectedBuilding.mustHaveBuildings != null)
+        {
+            foreach (var neighbor in neighbors)
+            {
+                if (neighbor.buildings != null) neighborBuildings.Add(neighbor.buildings[0]);
+            }
+
+            if (neighborBuildings != null && !selectedBuilding.mustHaveBuildings.Any(b => neighborBuildings.Contains(b)))
+            {
+                return;
+            }
+            else if (neighborBuildings == null)
+                return;
+        }
+
+
     }
 }
