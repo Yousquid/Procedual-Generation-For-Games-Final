@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Lumber Camp
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 2003675420848337897, guid: ab99fac9698662149b9ea56fb8a7e34e, type: 3}
   buildingTypeEnum: 1
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 2 for each adjacent

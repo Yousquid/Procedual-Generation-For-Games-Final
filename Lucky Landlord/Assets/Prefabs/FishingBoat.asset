@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Fishing Boat
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 5640038322283210527, guid: 71a95b0b03db6e14db9aff1a0bc4b57f, type: 3}
   buildingTypeEnum: 5
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 2 for each adjacent

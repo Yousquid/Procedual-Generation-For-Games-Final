@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Dock
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 8226212070636323757, guid: 04e04fdd696636644a883934f5959e1d, type: 3}
   buildingTypeEnum: 11
   buildingCategory: Enhancement
   specialEffectDescription: double the income of adjacent grids (must be built in

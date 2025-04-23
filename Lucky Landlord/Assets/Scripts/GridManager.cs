@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using TMPro;
 using static GridBuildingSystem2D;
+using Unity.VisualScripting;
 
 
 
@@ -33,7 +34,7 @@ public class GridManager : MonoBehaviour
 
     public enum MouseMode { PlaceBuilding, PlaceResource, ExplorationMap }
     public MouseMode currentMode = MouseMode.PlaceBuilding;
-    private GameObject currentGhostObject;
+    public GameObject currentGhostObject;
     private Vector2Int? currentGhostGridPos = null;
 
     public static int wealth = 0;
@@ -281,7 +282,7 @@ public class GridManager : MonoBehaviour
                 parent
             );
             resource.name = "Resource";
-            SetSortingOrder(resource, 1); // 资源在顶层
+            SetSortingOrder(resource, 3); // 资源在顶层
 
             // 添加资源动画（可选）
             if (resource.TryGetComponent<Animator>(out var anim))
@@ -307,12 +308,12 @@ public class GridManager : MonoBehaviour
             BuildingType buildingType = gridObj.buildings[i];
             if (buildingType?.buildingPrefab == null) continue;
 
-            
+       
             GameObject building = Instantiate(
                 buildingType.buildingPrefab,
-                parent.position,
+                parent.position + new Vector3(0, -0.17f, 0),
                 Quaternion.identity,
-                buildingContainer.transform
+                buildingContainer.transform 
             );
             building.name = $"Building_{buildingType.name}_{i}";
 
@@ -430,6 +431,7 @@ public class GridManager : MonoBehaviour
 
         ClickAndRevealFogCheck();
         BuildingModeGhostObjectPreview();
+        OnClikEvent();
     }
 
     private List<GameGridObject> GetNeighbors(int x, int y)
@@ -677,7 +679,7 @@ public class GridManager : MonoBehaviour
     {
         var gridObject = grid.GetGridObject(x, y);
 
-        if (gridObject.hasFogOfWar || gridObject.buildings.Contains(selectedBuilding)) return;
+        if (gridObject.hasFogOfWar ) return;
 
         if (selectedBuilding.allowedLandscapes != null && !selectedBuilding.allowedLandscapes.Contains(gridObject.landscape))
         {
@@ -685,7 +687,7 @@ public class GridManager : MonoBehaviour
             return;
         }
 
-        if (gridObject.buildings != null && gridObject.buildings[0] != null)
+        if (gridObject.buildings != null && gridObject.buildings.Count >0)
         {
             return;
         }
@@ -696,7 +698,7 @@ public class GridManager : MonoBehaviour
         
         List<BuildingType> neighborBuildings = new List<BuildingType>();
 
-        if (selectedBuilding.mustHaveLandscapes != null)
+        if (selectedBuilding.mustHaveLandscapes.Count > 0)
         {
             foreach (var neighbor in neighbors)
             { 
@@ -709,7 +711,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        if (selectedBuilding.mustHaveBuildings != null)
+        if (selectedBuilding.mustHaveBuildings.Count > 0)
         {
             foreach (var neighbor in neighbors)
             {
@@ -733,11 +735,11 @@ public class GridManager : MonoBehaviour
     {
         var gridObject = grid.GetGridObject(x, y);
 
-        if (gridObject.hasFogOfWar || gridObject.resource == selectedResource) return;
+        if (gridObject.hasFogOfWar) return;
 
         if (selectedResource.allowedLandscapes != null && !selectedResource.allowedLandscapes.Contains(gridObject.landscape))
         {
-            Debug.Log($"Cannot place {selectedBuilding.buildingName} on {gridObject.landscape.name}.");
+            Debug.Log($"Cannot place {selectedResource.resourceName} on {gridObject.landscape.name}.");
             return;
         }
 
@@ -757,8 +759,9 @@ public class GridManager : MonoBehaviour
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPos.z = 0f;
         grid.GetXY(mouseWorldPos, out int x, out int y);
+        GameGridObject gridObject = grid.GetGridObject(x, y);
 
-        if (IsValidGridPosition(x,y))
+        if (IsValidGridPosition(x, y) && !gridObject.hasFogOfWar)
         {
             Vector2Int gridPos = new Vector2Int(x, y);
 
@@ -766,7 +769,9 @@ public class GridManager : MonoBehaviour
             if (currentGhostGridPos != null && currentGhostGridPos.Value == gridPos) return;
 
             currentGhostGridPos = gridPos;
-            Vector3 cellCenter = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f) + new Vector3(0,-0.2F,0);//有一个小的向下的offset
+            
+            Vector3  cellCenter = grid.GetWorldPosition(x, y) + new Vector3(cellSize / 2f, cellSize / 2f); 
+                
 
             // 如果已有 ghostObject 就移动它，否则创建一个新的
             if (currentGhostObject != null)
@@ -781,15 +786,24 @@ public class GridManager : MonoBehaviour
                 {
                     prefabToUse = selectedBuilding.buildingPrefab;
                 }
-                else if (selectedResource != null && currentMode == MouseMode.PlaceResource)
+                if (selectedResource != null && currentMode == MouseMode.PlaceResource)
                 {
+                    
                     prefabToUse = selectedResource.resourcePrefab;
                 }
 
                 if (prefabToUse != null)
                 {
-                    currentGhostObject = Instantiate(prefabToUse, cellCenter, Quaternion.identity);
-                    SetGhostStyle(currentGhostObject);
+                    if (selectedBuilding != null && currentMode == MouseMode.PlaceBuilding)
+                    {
+                        currentGhostObject = Instantiate(prefabToUse, cellCenter + new Vector3(0, 0, -0.17f), Quaternion.identity);
+                        SetGhostStyle(currentGhostObject);
+                    }
+                    else
+                    {
+                        currentGhostObject = Instantiate(prefabToUse, cellCenter, Quaternion.identity);
+                        SetGhostStyle(currentGhostObject);
+                    }
                 }
             }
         }
@@ -805,6 +819,17 @@ public class GridManager : MonoBehaviour
         }
     }
 
+
+    private void ClearGhostObject()
+    {
+        if (currentGhostObject != null)
+        {
+            Destroy(currentGhostObject);
+            currentGhostObject = null;
+            currentGhostGridPos = null;
+        }
+    }
+
     private void SetGhostStyle(GameObject ghost)
     {
         foreach (var renderer in ghost.GetComponentsInChildren<SpriteRenderer>())
@@ -817,6 +842,27 @@ public class GridManager : MonoBehaviour
         foreach (var collider in ghost.GetComponentsInChildren<Collider2D>())
         {
             collider.enabled = false;
+        }
+    }
+
+    private void OnClikEvent()
+    {
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos.z = 0f;
+        grid.GetXY(mouseWorldPos, out int x, out int y);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (currentMode == MouseMode.PlaceBuilding)
+            {
+                print(new Vector2Int(x, y));
+                PlaceBuilding(x,y);
+            }
+            else if (currentMode == MouseMode.PlaceResource)
+            {
+                PlaceResource(x, y);
+            }
+
         }
     }
 }

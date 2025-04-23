@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Ranch
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 9116066174241957864, guid: 49877e567b68cab41ac5a641578cd1e5, type: 3}
   buildingTypeEnum: 4
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 1 for each adjacent

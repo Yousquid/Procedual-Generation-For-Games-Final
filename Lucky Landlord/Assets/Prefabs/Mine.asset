@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Mine
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 856760157229583297, guid: 45294a85f7f434448b10002cc8bda08b, type: 3}
   buildingTypeEnum: 2
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 2 for each adjacent

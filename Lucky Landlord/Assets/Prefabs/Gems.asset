@@ -15,8 +15,7 @@ MonoBehaviour:
   resourceName: Gems
   baseIncomeValue: 3
   resourcePrefab: {fileID: 7800890164973871514, guid: 55e951f54eecde64ba0e399e335f8364, type: 3}
-  specialEffectDescription: Double the income of this grid, increase the income of
-    this grid if this is on a Mountain/Desert.
+  specialEffectDescription: Double the income of this grid if this is on a Mountain/Desert.
   doubleGridIncome: 1
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
@@ -25,4 +24,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
   - {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}
   canDoubleIncomeBuildings: []
+  allowedLandscapes:
+  - {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}
+  - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
+  - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
+  - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
+  - {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
+  - {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
+  - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
+  - {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
   incomePerMatch: 0

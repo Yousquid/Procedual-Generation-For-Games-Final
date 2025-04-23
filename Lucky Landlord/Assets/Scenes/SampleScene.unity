@@ -733,9 +733,10 @@ MonoBehaviour:
   resourceTypes: []
   buildingTypes: []
   fogPrefab: {fileID: 8482319672287019591, guid: 0030a92ba5fefd64a928cdae984bc139, type: 3}
-  selectedBuilding: {fileID: 11400000, guid: c0f3e6e531a9cda46984a5001bcd5d94, type: 2}
-  selectedResource: {fileID: 0}
-  currentMode: 2
+  selectedBuilding: {fileID: 11400000, guid: 19f97ff295dd0c44087e4117ac96f434, type: 2}
+  selectedResource: {fileID: 11400000, guid: d3354a8e9edc8674ca35053b04486169, type: 2}
+  currentMode: 0
+  currentGhostObject: {fileID: 0}
   mainCamera: {fileID: 519420031}
   gridParent: {fileID: 1517112020}
   incomeTextPrefab: {fileID: 5505254956279835713, guid: 0fa18f45060a0c541a99bbe0aef8ccef, type: 3}
