@@ -419,6 +419,34 @@ public class GridManager : MonoBehaviour
         return neighbors;
     }
 
+    private List<GameGridObject> GetNeighborsIncludingSelf(int x, int y)
+    {
+        List<GameGridObject> neighbors = new List<GameGridObject>();
+        int[,] offsets = new int[,] {
+        { -1,  0 }, // 左
+        {  1,  0 }, // 右
+        {  0, -1 }, // 下
+        {  0,  1 }, // 上
+        { -1, -1 }, // 左下
+        { -1,  1 }, // 左上
+        {  1, -1 }, // 右下
+        {  1,  1 },
+        { 0,0} };// 右上
+
+        for (int i = 0; i < offsets.GetLength(0); i++)
+        {
+            int nx = x + offsets[i, 0];
+            int ny = y + offsets[i, 1];
+
+            if (nx >= 0 && ny >= 0 && nx < grid.GetWidth() && ny < grid.GetHeight())
+            {
+                neighbors.Add(grid.GetGridObject(nx, ny));
+            }
+        }
+
+        return neighbors;
+    }
+
     public int CalculateIncome(int x, int y)
     {
         GameGridObject gridObject = grid.GetGridObject(x, y);
@@ -445,7 +473,14 @@ public class GridManager : MonoBehaviour
                 income += gridObject.landscape.incomePerMatch;
             }
 
-            // 建筑加成
+            
+        }
+
+        List<GameGridObject> neighborsIncludingSelf = GetNeighborsIncludingSelf(x, y);
+
+        // 建筑加成
+        foreach (GameGridObject neighbor in neighborsIncludingSelf)
+        {
             foreach (var building in gridObject.buildings)
             {
                 if (building.bonusFromAdjacentLandscapes.Contains(neighbor.landscape) && neighbor.hasFogOfWar == false)
@@ -463,6 +498,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+        
 
         // 3. 邻居中具有翻倍效果的建筑（每种类型只生效一次）
         HashSet<BuildingType> appliedDoubleTypes = new HashSet<BuildingType>();

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ranch
   m_EditorClassIdentifier: 
   buildingName: Ranch
-  baseIncomeValue: 0
+  baseIncomeValue: 1
   buildingPrefab: {fileID: 0}
   buildingTypeEnum: 4
   buildingCategory: Production
@@ -27,5 +27,5 @@ MonoBehaviour:
   bonusFromAdjacentBuildings:
   - {fileID: 11400000}
   - {fileID: 11400000, guid: 660be67e43e59434da9fb2b6636b9664, type: 2}
-  incomePerMatch: 1
+  incomePerMatch: 2
   doublesAdjacentIncome: 0

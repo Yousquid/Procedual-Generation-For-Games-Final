@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: Canal
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 5505254956279835713, guid: 181dbf1fce4149e44983adcb911a384f, type: 3}
   buildingTypeEnum: 9
   buildingCategory: Enhancement
   specialEffectDescription: double the income of adjacent grids (must be built near
