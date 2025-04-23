@@ -175,6 +175,7 @@ public class GridManager : MonoBehaviour
                 GameGridObject gridObj = grid.GetGridObject(x, y);
                 VisualizeTerrain(gridObj, cellParent);
                 VisualizeResource(gridObj, cellParent);
+                VisualizeBuilding(gridObj, cellParent);
                 VisualizeFogOfWar(gridObj, cellParent); // 新增迷雾可视化
                 UpdateIncomeVisuals();
 
@@ -281,6 +282,36 @@ public class GridManager : MonoBehaviour
             {
                 anim.Play("ResourceIdle");
             }
+        }
+    }
+
+    private void VisualizeBuilding(GameGridObject gridObj, Transform parent)
+    {
+        if (gridObj.buildings == null || gridObj.buildings.Count == 0)
+            return;
+
+        // 创建建筑容器
+        GameObject buildingContainer = new GameObject("Buildings");
+        buildingContainer.transform.SetParent(parent);
+        buildingContainer.transform.localPosition = Vector3.zero;
+
+        // 遍历所有建筑
+        for (int i = 0; i < gridObj.buildings.Count; i++)
+        {
+            BuildingType buildingType = gridObj.buildings[i];
+            if (buildingType?.buildingPrefab == null) continue;
+
+            
+            GameObject building = Instantiate(
+                buildingType.buildingPrefab,
+                parent.position,
+                Quaternion.identity,
+                buildingContainer.transform
+            );
+            building.name = $"Building_{buildingType.name}_{i}";
+
+            // 设置层级（建筑在资源之上，迷雾之下）
+            SetSortingOrder(building, 2);
         }
     }
 
