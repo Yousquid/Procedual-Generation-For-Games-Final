@@ -4,6 +4,7 @@ public class SelectionItem
 {
     public Sprite icon;
     public string description;
+    public string name;
     public object data; // ¥Ê¥¢BuildingTypeªÚResourceTypeSo
     public bool isBuilding;
 }

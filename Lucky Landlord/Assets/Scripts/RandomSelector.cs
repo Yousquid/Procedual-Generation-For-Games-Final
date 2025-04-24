@@ -33,8 +33,9 @@ public class RandomSelector : MonoBehaviour
                 icon = building.iconRenderer.sprite,
                 description = building.specialEffectDescription,
                 data = building,
+                name = building.buildingName,
                 isBuilding = true
-            });
+            });;
         }
 
         foreach (var resource in allResources)
@@ -44,6 +45,7 @@ public class RandomSelector : MonoBehaviour
                 icon = resource.iconRenderer.sprite,
                 description = resource.specialEffectDescription,
                 data = resource,
+                name = resource.resourceName,
                 isBuilding = false
             });
         }
@@ -70,7 +72,7 @@ public class RandomSelector : MonoBehaviour
         }
 
         // 生成新选项
-        float spacing = 500f; // 选项间距
+        float spacing = 640f; // 选项间距
         for (int i = 0; i < currentOptions.Count; i++)
         {
             SelectionItemUI item = Instantiate(itemPrefab, selectionPanel);

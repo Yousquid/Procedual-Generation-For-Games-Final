@@ -8,7 +8,9 @@ public class SelectionItemUI : MonoBehaviour
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private Button selectButton;
-    //[SerializeField] private GameObject highlight;
+    [SerializeField] private GameObject highlight;
+    [SerializeField] private TextMeshProUGUI nameText;
+
 
     public SelectionItem Item { get; private set; }
 
@@ -17,12 +19,13 @@ public class SelectionItemUI : MonoBehaviour
         Item = item;
         iconImage.sprite = item.icon;
         descriptionText.text = item.description;
+        nameText.text = item.name;
         selectButton.onClick.AddListener(() => onClick());
-        //highlight.SetActive(false);
+        highlight.SetActive(false);
     }
 
     public void SetSelected(bool isSelected)
     {
-        GetComponent<Image>().color = isSelected ? Color.yellow : Color.white;
+        highlight.SetActive(isSelected);
     }
 }
