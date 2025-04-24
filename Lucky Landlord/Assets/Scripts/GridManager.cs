@@ -32,7 +32,9 @@ public class GridManager : MonoBehaviour
     public BuildingType selectedBuilding;
     public ResourceTypeSo selectedResource;
 
-    public enum MouseMode { PlaceBuilding, PlaceResource, ExplorationMap }
+    public UIManager uiManager;
+
+    public enum MouseMode { PlaceBuilding, PlaceResource, ExplorationMap, UISelection }
     public MouseMode currentMode = MouseMode.PlaceBuilding;
     public GameObject currentGhostObject;
     private Vector2Int? currentGhostGridPos = null;
@@ -681,9 +683,9 @@ public class GridManager : MonoBehaviour
 
         if (gridObject.hasFogOfWar ) return;
 
-        if (selectedBuilding.allowedLandscapes != null && !selectedBuilding.allowedLandscapes.Contains(gridObject.landscape))
+        if (selectedBuilding.allowedLandscapes.Count > 0 && !selectedBuilding.allowedLandscapes.Contains(gridObject.landscape))
         {
-            Debug.Log($"Cannot place {selectedBuilding.buildingName} on {gridObject.landscape.name}.");
+            uiManager.SetRemindText($"Cannot place {selectedBuilding.buildingName} on {gridObject.landscape.name}.");
             return;
         }
 
@@ -715,7 +717,7 @@ public class GridManager : MonoBehaviour
         {
             foreach (var neighbor in neighbors)
             {
-                if (neighbor.buildings != null) neighborBuildings.Add(neighbor.buildings[0]);
+                if (neighbor.buildings.Count > 0) neighborBuildings.Add(neighbor.buildings[0]);
             }
 
             if (neighborBuildings != null && !selectedBuilding.mustHaveBuildings.Any(b => neighborBuildings.Contains(b)))
@@ -728,7 +730,10 @@ public class GridManager : MonoBehaviour
 
         gridObject.buildings.Add(selectedBuilding);
         grid.TriggerGridObjectChanged(x, y);
+        currentMode = MouseMode.ExplorationMap;
+        selectedBuilding = null;
         VisualizeGrid();
+
     }
 
     private void PlaceResource(int x, int y)
@@ -739,7 +744,7 @@ public class GridManager : MonoBehaviour
 
         if (selectedResource.allowedLandscapes != null && !selectedResource.allowedLandscapes.Contains(gridObject.landscape))
         {
-            Debug.Log($"Cannot place {selectedResource.resourceName} on {gridObject.landscape.name}.");
+            uiManager.SetRemindText($"Cannot place {selectedResource.resourceName} on {gridObject.landscape.name}.");
             return;
         }
 
@@ -750,8 +755,9 @@ public class GridManager : MonoBehaviour
 
         gridObject.resource = selectedResource;
         grid.TriggerGridObjectChanged(x, y);
+        selectedResource = null;
+        currentMode = MouseMode.ExplorationMap;
         VisualizeGrid();
-
     }
 
     private void BuildingModeGhostObjectPreview()
@@ -794,7 +800,7 @@ public class GridManager : MonoBehaviour
                 else if (selectedResource != null && currentMode == MouseMode.PlaceResource)
                     prefabToUse = selectedResource.resourcePrefab;
 
-                if (prefabToUse != null)
+                if (prefabToUse != null && currentMode != MouseMode.ExplorationMap && currentMode != MouseMode.UISelection)
                 {
                     currentGhostObject = Instantiate(prefabToUse, displayPosition, Quaternion.identity);
                     SetGhostStyle(currentGhostObject);
@@ -849,7 +855,6 @@ public class GridManager : MonoBehaviour
         {
             if (currentMode == MouseMode.PlaceBuilding)
             {
-                print(new Vector2Int(x, y));
                 PlaceBuilding(x,y);
             }
             else if (currentMode == MouseMode.PlaceResource)
@@ -858,5 +863,13 @@ public class GridManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void StopPlacement()
+    { 
+        selectedBuilding = null;
+        selectedResource = null;
+        uiManager.CloseCancelInquiry();
+        currentMode = MouseMode.ExplorationMap;
     }
 }

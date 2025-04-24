@@ -14,6 +14,7 @@ public class RandomSelector : MonoBehaviour
 
     private List<SelectionItem> currentOptions = new List<SelectionItem>();
     private SelectionItem selectedItem;
+    public GridManager gridManager;
 
     void Start()
     {
@@ -23,7 +24,8 @@ public class RandomSelector : MonoBehaviour
 
     public void StartRandomSelection()
     {
-        // 合并所有可选项
+        gridManager.currentMode = GridManager.MouseMode.UISelection;
+        
         var allItems = new List<SelectionItem>();
 
         foreach (var building in allBuildings)
@@ -63,6 +65,7 @@ public class RandomSelector : MonoBehaviour
     void ShowSelectionUI()
     {
         selectionPanel.gameObject.SetActive(true);
+        confirmButton.gameObject.SetActive(true);
         Time.timeScale = 0; // 暂停游戏
 
         // 清空现有选项
@@ -75,6 +78,7 @@ public class RandomSelector : MonoBehaviour
         float spacing = 640f; // 选项间距
         for (int i = 0; i < currentOptions.Count; i++)
         {
+            var option = currentOptions[i];  // 冻结当前项
             SelectionItemUI item = Instantiate(itemPrefab, selectionPanel);
             item.transform.localPosition = new Vector3(
                 (i - 1) * spacing,
@@ -84,7 +88,7 @@ public class RandomSelector : MonoBehaviour
 
             item.Initialize(
                 currentOptions[i],
-                () => OnSelectItem(currentOptions[i])
+                () => OnSelectItem(option)
             );
         }
     }
@@ -111,12 +115,17 @@ public class RandomSelector : MonoBehaviour
             if (selectedItem.isBuilding)
             {
                 BuildingType building = selectedItem.data as BuildingType;
-                //FindObjectOfType<BuildingPlacer>().StartPlacing(building);
+                gridManager.selectedBuilding = building;
+                gridManager.currentMode = GridManager.MouseMode.PlaceBuilding;
+                confirmButton.gameObject.SetActive(false);
+
             }
             else
             {
                 ResourceTypeSo resource = selectedItem.data as ResourceTypeSo;
-                //FindObjectOfType<ResourcePlacer>().StartPlacing(resource);
+                gridManager.selectedResource = resource;
+                gridManager.currentMode = GridManager.MouseMode.PlaceResource;
+                confirmButton.gameObject.SetActive(false);
             }
         }
     }
