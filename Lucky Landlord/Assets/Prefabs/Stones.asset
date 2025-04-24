@@ -18,6 +18,7 @@ MonoBehaviour:
   specialEffectDescription: Double the income of this grid if this is on a Mountain
     or Hill Landscape.
   doubleGridIncome: 1
+  iconRenderer: {fileID: 3351901435093093165, guid: e5cae5f4ab3239149930e054998d30af, type: 3}
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings: []

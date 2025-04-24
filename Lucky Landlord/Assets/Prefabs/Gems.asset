@@ -17,6 +17,7 @@ MonoBehaviour:
   resourcePrefab: {fileID: 7800890164973871514, guid: 55e951f54eecde64ba0e399e335f8364, type: 3}
   specialEffectDescription: Double the income of this grid if this is on a Mountain/Desert.
   doubleGridIncome: 1
+  iconRenderer: {fileID: 4588064747501249802, guid: 55e951f54eecde64ba0e399e335f8364, type: 3}
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings: []

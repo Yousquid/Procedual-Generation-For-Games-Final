@@ -19,6 +19,7 @@ MonoBehaviour:
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 2 for each adjacent
     Hill/Mountain Landscape / Stone/ Gem Resource
+  iconRenderer: {fileID: 4421769698081436405, guid: 45294a85f7f434448b10002cc8bda08b, type: 3}
   bonusFromAdjacentLandscapes:
   - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
   - {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}

@@ -18,6 +18,7 @@ MonoBehaviour:
   specialEffectDescription: Double the income of this grid if this is on a Grass/Plain
     or with a Ranch.
   doubleGridIncome: 1
+  iconRenderer: {fileID: 748238409189501125, guid: 399a77dc4079d714e92ae08e7c40d567, type: 3}
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings: []

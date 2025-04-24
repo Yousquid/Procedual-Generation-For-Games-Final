@@ -19,6 +19,7 @@ MonoBehaviour:
   buildingCategory: Enhancement
   specialEffectDescription: incrase the income of this grid by 2 for each adjacent
     grid with Production Building
+  iconRenderer: {fileID: 1560782315537176866, guid: 53255722488333e4d913d9d6613f457d, type: 3}
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings:

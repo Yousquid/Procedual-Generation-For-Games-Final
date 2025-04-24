@@ -19,6 +19,7 @@ MonoBehaviour:
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 1 for each adjacent
     Grassland/ Plain/Cows Resource/Ranch/ Farm Building
+  iconRenderer: {fileID: 8307545006970501005, guid: 49877e567b68cab41ac5a641578cd1e5, type: 3}
   bonusFromAdjacentLandscapes:
   - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
   - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}

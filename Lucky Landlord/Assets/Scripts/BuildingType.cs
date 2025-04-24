@@ -16,6 +16,7 @@ public class BuildingType : ScriptableObject
     public BuildingTypes buildingTypeEnum;
     public string buildingCategory; // Production or Enhancement
     public string specialEffectDescription;
+    public SpriteRenderer iconRenderer;          // Õ¹Ê¾Í¼±ê
     public List<LandscapeTypeSo> bonusFromAdjacentLandscapes;
     public List<ResourceTypeSo> bonusFromAdjacentResources;
     public List<BuildingType> bonusFromAdjacentBuildings;

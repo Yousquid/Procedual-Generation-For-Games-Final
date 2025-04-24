@@ -19,6 +19,7 @@ MonoBehaviour:
   buildingCategory: Production
   specialEffectDescription: incrase the income of this grid by 2 for each adjacent
     grid with House
+  iconRenderer: {fileID: 302282888219947708, guid: 24c1f122831584f4684fa67a748ef5ea, type: 3}
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings:

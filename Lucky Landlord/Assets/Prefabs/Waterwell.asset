@@ -19,6 +19,7 @@ MonoBehaviour:
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 5 if this grid for
     each adjacent Wasteland/Desert
+  iconRenderer: {fileID: 1969287798316287282, guid: 2323c62dbb5e1954b84ecfda186bd6d9, type: 3}
   bonusFromAdjacentLandscapes:
   - {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
   - {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}

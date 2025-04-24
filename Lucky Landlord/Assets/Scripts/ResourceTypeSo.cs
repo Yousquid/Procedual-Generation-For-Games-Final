@@ -10,6 +10,7 @@ public class ResourceTypeSo : ScriptableObject
     public GameObject resourcePrefab;
     public string specialEffectDescription;
     public bool doubleGridIncome;
+    public SpriteRenderer iconRenderer;          // Õ¹Ê¾Í¼±ê
     public List<LandscapeTypeSo> bonusFromAdjacentLandscapes;
     public List<ResourceTypeSo> bonusFromAdjacentResources;
     public List<BuildingType> bonusFromAdjacentBuildings;

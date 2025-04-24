@@ -19,6 +19,7 @@ MonoBehaviour:
   buildingCategory: Production
   specialEffectDescription: increase the income of this grid by 2 for each adjacent
     Lake/Fish
+  iconRenderer: {fileID: 8538206598709031781, guid: 71a95b0b03db6e14db9aff1a0bc4b57f, type: 3}
   bonusFromAdjacentLandscapes:
   - {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
   bonusFromAdjacentResources:
