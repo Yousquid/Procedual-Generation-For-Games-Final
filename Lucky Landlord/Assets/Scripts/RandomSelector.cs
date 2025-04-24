@@ -20,6 +20,7 @@ public class RandomSelector : MonoBehaviour
     {
         selectionPanel.gameObject.SetActive(false);
         confirmButton.onClick.AddListener(OnConfirm);
+        confirmButton.gameObject.SetActive(false);
     }
 
     public void StartRandomSelection()
