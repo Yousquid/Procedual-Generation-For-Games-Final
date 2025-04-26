@@ -818,6 +818,8 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   gridParent: {fileID: 1517112020}
   incomeTextPrefab: {fileID: 5505254956279835713, guid: 0fa18f45060a0c541a99bbe0aef8ccef, type: 3}
+  fogRevealingPrice: 20
+  revealedFogNumber: 0
 --- !u!4 &978205595
 Transform:
   m_ObjectHideFlags: 0
@@ -850,6 +852,7 @@ MonoBehaviour:
   remindText: {fileID: 1833143643}
   cancelPlacementButton: {fileID: 1545525713}
   continuePlacementButton: {fileID: 1490954465}
+  remindImageBackground: {fileID: 2055510749}
 --- !u!114 &978205597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,6 +996,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 291486970}
+  - {fileID: 2055510748}
   - {fileID: 385185455}
   - {fileID: 1619541768}
   - {fileID: 1833143642}
@@ -1225,7 +1229,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1310452134}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 978205597}
+        m_TargetAssemblyTypeName: RandomSelector, Assembly-CSharp
+        m_MethodName: StartRandomSelection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1310452134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1962,6 +1978,7 @@ GameObject:
   - component: {fileID: 1833143642}
   - component: {fileID: 1833143644}
   - component: {fileID: 1833143643}
+  - component: {fileID: 1833143645}
   m_Layer: 5
   m_Name: RemindText
   m_TagString: Untagged
@@ -2087,6 +2104,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833143641}
   m_CullTransparentMesh: 1
+--- !u!210 &1833143645
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833143641}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
 --- !u!1 &1930020962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2523,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973878519}
+  m_CullTransparentMesh: 1
+--- !u!1 &2055510747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055510748}
+  - component: {fileID: 2055510750}
+  - component: {fileID: 2055510749}
+  m_Layer: 5
+  m_Name: RemindImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2055510748
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055510747}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 983548656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000061035, y: -38.001}
+  m_SizeDelta: {x: 1754.1, y: 329.23}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2055510749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055510747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2055510750
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055510747}
   m_CullTransparentMesh: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

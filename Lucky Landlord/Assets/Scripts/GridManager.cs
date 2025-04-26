@@ -48,6 +48,10 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject incomeTextPrefab; // 拖入TextMeshPro预制体
     private Dictionary<Vector2Int, TextMeshPro> incomeTexts = new Dictionary<Vector2Int, TextMeshPro>();
 
+    public int fogRevealingPrice = 20;
+
+    public int revealedFogNumber = 0;
+
     public class GameGridObject
     {
         public LandscapeTypeSo landscape;
@@ -233,6 +237,10 @@ public class GridManager : MonoBehaviour
                 Quaternion.identity,
                 parent
             );
+
+            FogTile fogScript = fog.GetComponent<FogTile>();
+
+            fogScript.SetPrice(fogRevealingPrice);
 
         }
     }
@@ -434,6 +442,7 @@ public class GridManager : MonoBehaviour
         ClickAndRevealFogCheck();
         BuildingModeGhostObjectPreview();
         OnClikEvent();
+
     }
 
     private List<GameGridObject> GetNeighbors(int x, int y)
@@ -664,11 +673,18 @@ public class GridManager : MonoBehaviour
                 {
                     GameGridObject gridObject = grid.GetGridObject(x, y);
 
-                    if (gridObject.hasFogOfWar)
+                    if (gridObject.hasFogOfWar && wealth >= fogRevealingPrice)
                     {
                         gridObject.hasFogOfWar = false;
                         grid.TriggerGridObjectChanged(x, y);
+                        revealedFogNumber++;
+                        fogRevealingPrice = 20 + revealedFogNumber * 3;
+                        wealth -= fogRevealingPrice;
                         VisualizeGrid();
+                    }
+                    else if (wealth < fogRevealingPrice)
+                    {
+                        uiManager.SetRemindText("No enough money to buy this land!");
                     }
                 }
 

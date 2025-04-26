@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     private float remindMinimalShowingTimeLimit = .5f;
     private float remindTimer = 0;
     private bool isShowingRemindText = false;
+    public Image remindImageBackground;
 
     private void Awake()
     {
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
         remindText.gameObject.SetActive(false);
         cancelPlacementButton.gameObject.SetActive(false);
         continuePlacementButton.gameObject.SetActive(false);
+        remindImageBackground.gameObject.SetActive(false);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,27 +38,28 @@ public class UIManager : MonoBehaviour
 
         CancelBuildingorResourcePlacement();
 
-        
+        RemindTextTimer();
 
 
     }
 
     private void LateUpdate()
     {
-        if (!cancelPlacementButton.gameObject.activeSelf)
-        {
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-            {
-                if (!isShowingRemindText)
-                CloseRemindText(); 
-            }
-        }
+        //if (!cancelPlacementButton.gameObject.activeSelf)
+        //{
+        //    if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+        //    {
+        //        if (!isShowingRemindText)
+        //        CloseRemindText(); 
+        //    }
+        //}
     }
 
     public void SetRemindText(string remindTextToUse)
     { 
         isShowingRemindText = true;
         remindText.gameObject.SetActive (true);
+        remindImageBackground.gameObject.SetActive(true);
         remindText.text = remindTextToUse;
     }
 
@@ -70,11 +73,13 @@ public class UIManager : MonoBehaviour
         { 
             isShowingRemindText = false;
             remindTimer = 0;
+            CloseRemindText();
         }
     }
     private void CloseRemindText()
     {
         remindText.gameObject.SetActive(false);
+        remindImageBackground.gameObject.SetActive(false);
     }
 
     private void CancelBuildingorResourcePlacement()
