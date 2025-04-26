@@ -22,7 +22,8 @@ MonoBehaviour:
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings: []
-  canDoubleIncomeLandscapes: []
+  canDoubleIncomeLandscapes:
+  - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
   canDoubleIncomeBuildings: []
   allowedLandscapes:
   - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}

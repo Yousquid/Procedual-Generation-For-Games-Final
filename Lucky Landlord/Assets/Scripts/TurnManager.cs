@@ -31,21 +31,21 @@ public class TurnManager : MonoBehaviour
 
     public int GetCurrentTaxNeedToPay()
     {
-        if (currentTurn < 5)
+        if (currentTurn <= 5)
         {
-            return 150;
+            return 200;
         }
-        if (currentTurn >= 5 && currentTurn < 11)
-        {
-            return 450;
-        }
-        if (currentTurn >= 11 && currentTurn < 18)
+        if (currentTurn > 5 && currentTurn <= 11)
         {
             return 1000;
         }
-        if (currentTurn >= 18 && currentTurn < 26)
+        if (currentTurn > 11 && currentTurn <= 18)
         {
-            return 2500;
+            return 2000;
+        }
+        if (currentTurn > 18 && currentTurn <= 26)
+        {
+            return 5000;
         }
         else return 0;
     }

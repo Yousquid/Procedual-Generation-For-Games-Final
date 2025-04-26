@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public class RandomSelector : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class RandomSelector : MonoBehaviour
 
     public UIManager uIManager;
 
+    public Button checkMapButton;
+    public TextMeshProUGUI checkButtonText;
+    private bool isCheckingMap = false;
+
     public int rollPrice = 15;
     public int rollTimes = 0;
 
@@ -26,8 +31,28 @@ public class RandomSelector : MonoBehaviour
         selectionPanel.gameObject.SetActive(false);
         confirmButton.onClick.AddListener(OnConfirm);
         confirmButton.gameObject.SetActive(false);
+        checkMapButton.gameObject.SetActive(false);
     }
 
+    public void OnClickCheckMap()
+    {
+        if (!isCheckingMap)
+        {
+            checkButtonText.text = "Return Selection";
+            selectionPanel.gameObject.SetActive(false);
+            confirmButton.gameObject.SetActive(false);
+            isCheckingMap = true;
+        }
+        else if (isCheckingMap)
+        {
+            checkButtonText.text = "Check Map";
+            selectionPanel.gameObject.SetActive(true);
+            confirmButton.gameObject.SetActive(true);
+            isCheckingMap = false;
+        }
+
+
+    }
     public void StartRandomSelection()
     {
         rollTimes += 1;
@@ -67,7 +92,11 @@ public class RandomSelector : MonoBehaviour
             .ToList();
 
         // 显示UI
-        ShowSelectionUI();
+        if (!isCheckingMap)
+        {
+            ShowSelectionUI();
+
+        }
     }
 
     void ShowSelectionUI()
@@ -76,6 +105,7 @@ public class RandomSelector : MonoBehaviour
         confirmButton.gameObject.SetActive(true);
         uIManager.turnButton.gameObject.SetActive(false);
         uIManager.shopButton.gameObject.SetActive(false);
+        checkMapButton.gameObject.SetActive(true);
         Time.timeScale = 0; // 暂停游戏
 
         // 清空现有选项
@@ -150,6 +180,6 @@ public class RandomSelector : MonoBehaviour
             StartRandomSelection();
         }
 
-        rollPrice = 10 + rollTimes * 5;
+        rollPrice = 10 + rollTimes * 10;
     }
 }

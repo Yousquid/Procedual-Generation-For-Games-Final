@@ -17,7 +17,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 1650312171412683351, guid: 24c1f122831584f4684fa67a748ef5ea, type: 3}
   buildingTypeEnum: 7
   buildingCategory: Production
-  specialEffectDescription: incrase the income of this grid by 2 for each adjacent
+  specialEffectDescription: incrase the income of this grid by 10 for each adjacent
     grid with House
   iconRenderer: {fileID: 302282888219947708, guid: 24c1f122831584f4684fa67a748ef5ea, type: 3}
   bonusFromAdjacentLandscapes: []
@@ -34,5 +34,5 @@ MonoBehaviour:
   allowedBuildings: []
   mustHaveBuildings: []
   mustHaveLandscapes: []
-  incomePerMatch: 2
+  incomePerMatch: 10
   doublesAdjacentIncome: 0
