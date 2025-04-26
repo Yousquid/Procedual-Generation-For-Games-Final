@@ -13,7 +13,7 @@ public class FogTile : MonoBehaviour
     }
     public void SetPrice(int price)
     {
-        priceText.text = $"$ +{price}";
+        priceText.text = $"${price}";
     }
 
     public void SetPriceVisible(bool visible)

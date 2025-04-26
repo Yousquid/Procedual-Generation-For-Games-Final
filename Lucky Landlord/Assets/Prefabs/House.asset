@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: House
   baseIncomeValue: 1
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 1650312171412683351, guid: 24c1f122831584f4684fa67a748ef5ea, type: 3}
   buildingTypeEnum: 7
   buildingCategory: Production
   specialEffectDescription: incrase the income of this grid by 2 for each adjacent

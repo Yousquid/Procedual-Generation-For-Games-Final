@@ -48,7 +48,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject incomeTextPrefab; // 拖入TextMeshPro预制体
     private Dictionary<Vector2Int, TextMeshPro> incomeTexts = new Dictionary<Vector2Int, TextMeshPro>();
 
-    public int fogRevealingPrice = 20;
+    public int fogRevealingPrice = 15;
 
     public int revealedFogNumber = 0;
 
@@ -82,6 +82,7 @@ public class GridManager : MonoBehaviour
         InitializeFogOfWar();
         GenerateResources();
         VisualizeGrid();
+        wealth = 50;
     }
 
     private void InitializeGrid()
@@ -678,7 +679,7 @@ public class GridManager : MonoBehaviour
                         gridObject.hasFogOfWar = false;
                         grid.TriggerGridObjectChanged(x, y);
                         revealedFogNumber++;
-                        fogRevealingPrice = 20 + revealedFogNumber * 3;
+                        fogRevealingPrice = 15 + revealedFogNumber * 3;
                         wealth -= fogRevealingPrice;
                         VisualizeGrid();
                     }

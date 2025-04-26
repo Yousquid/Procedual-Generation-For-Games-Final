@@ -16,6 +16,8 @@ public class RandomSelector : MonoBehaviour
     private SelectionItem selectedItem;
     public GridManager gridManager;
 
+    public UIManager uIManager;
+
     public int rollPrice = 15;
     public int rollTimes = 0;
 
@@ -72,6 +74,8 @@ public class RandomSelector : MonoBehaviour
     {
         selectionPanel.gameObject.SetActive(true);
         confirmButton.gameObject.SetActive(true);
+        uIManager.turnButton.gameObject.SetActive(false);
+        uIManager.shopButton.gameObject.SetActive(false);
         Time.timeScale = 0; // 暂停游戏
 
         // 清空现有选项
@@ -124,7 +128,8 @@ public class RandomSelector : MonoBehaviour
                 gridManager.selectedBuilding = building;
                 gridManager.currentMode = GridManager.MouseMode.PlaceBuilding;
                 confirmButton.gameObject.SetActive(false);
-
+                uIManager.turnButton.gameObject.SetActive(true);
+                uIManager.shopButton.gameObject.SetActive(true);
             }
             else
             {
@@ -132,6 +137,8 @@ public class RandomSelector : MonoBehaviour
                 gridManager.selectedResource = resource;
                 gridManager.currentMode = GridManager.MouseMode.PlaceResource;
                 confirmButton.gameObject.SetActive(false);
+                uIManager.turnButton.gameObject.SetActive(true);
+                uIManager.shopButton.gameObject.SetActive(true);
             }
         }
     }
@@ -142,5 +149,7 @@ public class RandomSelector : MonoBehaviour
         { 
             StartRandomSelection();
         }
+
+        rollPrice = 10 + rollTimes * 5;
     }
 }

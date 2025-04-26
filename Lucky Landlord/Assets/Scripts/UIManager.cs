@@ -16,6 +16,16 @@ public class UIManager : MonoBehaviour
     private float remindTimer = 0;
     private bool isShowingRemindText = false;
     public Image remindImageBackground;
+    public TextMeshProUGUI shopText;
+    public RandomSelector randomSelector;
+    public Button shopButton;
+    public Button turnButton;
+    public TextMeshProUGUI taxText;
+    public TurnManager turnManager;
+    public Button payTaxButton;
+    public Image payTaxBackground;
+    public TextMeshProUGUI taxBackgroundText;
+
 
     private void Awake()
     {
@@ -24,13 +34,19 @@ public class UIManager : MonoBehaviour
         cancelPlacementButton.gameObject.SetActive(false);
         continuePlacementButton.gameObject.SetActive(false);
         remindImageBackground.gameObject.SetActive(false);
+        payTaxButton.gameObject.SetActive(false);
+        payTaxBackground.gameObject.SetActive(false);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        turnManager = GetComponent<TurnManager>();
     }
 
+    private void UpdateTaxText()
+    {
+        taxText.text = $"Pay ${turnManager.GetCurrentTaxNeedToPay()} after {turnManager.currentLeftTurns} Turns.";
+    }
     // Update is called once per frame
     void Update()
     {
@@ -40,21 +56,65 @@ public class UIManager : MonoBehaviour
 
         RemindTextTimer();
 
+        UpdateTaxText();
+
+        shopText.text = $"${randomSelector.rollPrice}: Get a Roll";
 
     }
 
-    private void LateUpdate()
+    public void PayTax()
     {
-        //if (!cancelPlacementButton.gameObject.activeSelf)
-        //{
-        //    if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
-        //    {
-        //        if (!isShowingRemindText)
-        //        CloseRemindText(); 
-        //    }
-        //}
+        payTaxButton.gameObject.SetActive(true);
+        payTaxBackground.gameObject.SetActive(true);
+        taxBackgroundText.text = $"You need to pay ${turnManager.GetCurrentTaxNeedToPay()} taxes!";
     }
 
+    private void ClosePayTaxUIs()
+    {
+        payTaxButton.gameObject.SetActive(false);
+        payTaxBackground.gameObject.SetActive(false);
+    }
+    public void OnClickPayTax()
+    {
+        if (turnManager.currentTurn == 5)
+        {
+            turnManager.currentLeftTurns = 6;
+            GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
+            ClosePayTaxUIs();
+        }
+        if (turnManager.currentTurn == 11)
+        {
+            turnManager.currentLeftTurns = 7;
+            GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
+            ClosePayTaxUIs();
+
+        }
+        if (turnManager.currentTurn == 18)
+        {
+            turnManager.currentLeftTurns = 8;
+            GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
+            ClosePayTaxUIs();
+
+        }
+        if (turnManager.currentTurn == 26)
+        {
+            GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
+            ClosePayTaxUIs();
+
+        }
+    }
+    public void OnShopButtonPressed()
+    {
+        if (GridManager.wealth >= randomSelector.rollPrice)
+        {
+            randomSelector.StartRandomSelection();
+            GridManager.wealth -= randomSelector.rollPrice;
+        }
+        else
+        {
+            SetRemindText("No enough money to get a roll");
+        }
+    }
     public void SetRemindText(string remindTextToUse)
     { 
         isShowingRemindText = true;
