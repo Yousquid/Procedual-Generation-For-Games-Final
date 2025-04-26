@@ -16,6 +16,9 @@ public class RandomSelector : MonoBehaviour
     private SelectionItem selectedItem;
     public GridManager gridManager;
 
+    public int rollPrice = 15;
+    public int rollTimes = 0;
+
     void Start()
     {
         selectionPanel.gameObject.SetActive(false);
@@ -25,6 +28,8 @@ public class RandomSelector : MonoBehaviour
 
     public void StartRandomSelection()
     {
+        rollTimes += 1;
+
         gridManager.currentMode = GridManager.MouseMode.UISelection;
         
         var allItems = new List<SelectionItem>();
