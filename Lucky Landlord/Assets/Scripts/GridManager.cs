@@ -685,7 +685,7 @@ public class GridManager : MonoBehaviour
                         gridObject.hasFogOfWar = false;
                         grid.TriggerGridObjectChanged(x, y);
                         revealedFogNumber++;
-                        fogRevealingPrice = 10 + (revealedFogNumber * 4)* (turnManager.currentTurn - 3) ;
+                        fogRevealingPrice = 10 + (revealedFogNumber * 4) ;
                         wealth -= fogRevealingPrice;
                         VisualizeGrid();
                     }
