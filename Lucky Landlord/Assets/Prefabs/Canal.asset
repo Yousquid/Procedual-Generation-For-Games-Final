@@ -18,16 +18,17 @@ MonoBehaviour:
   buildingTypeEnum: 9
   buildingCategory: Enhancement
   specialEffectDescription: double the income of adjacent grids (must be built near
-    a lake and a farm, this multiplier can only be applied once)
+    a lake and on a Grassland/Plain grid, this multiplier can only be applied once)
   iconRenderer: {fileID: 2210455524475192672, guid: 181dbf1fce4149e44983adcb911a384f, type: 3}
   bonusFromAdjacentLandscapes: []
   bonusFromAdjacentResources: []
   bonusFromAdjacentBuildings: []
-  allowedLandscapes: []
+  allowedLandscapes:
+  - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
+  - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
   allowedResources: []
   allowedBuildings: []
-  mustHaveBuildings:
-  - {fileID: 11400000, guid: 660be67e43e59434da9fb2b6636b9664, type: 2}
+  mustHaveBuildings: []
   mustHaveLandscapes:
   - {fileID: 11400000, guid: c6b6a23f65785034ba7959b66239be75, type: 2}
   incomePerMatch: 0

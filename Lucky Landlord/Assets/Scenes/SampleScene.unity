@@ -1429,7 +1429,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 69283bce3ffc3ff4db819c188a6548f6, type: 2}
   - {fileID: 11400000, guid: 362d370df461eeb498ee3556fb1f0e44, type: 2}
   - {fileID: 11400000, guid: fa3fa41c92bee4840a21fa33666d6d30, type: 2}
+  - {fileID: 11400000, guid: 660be67e43e59434da9fb2b6636b9664, type: 2}
+  - {fileID: 11400000, guid: 19f97ff295dd0c44087e4117ac96f434, type: 2}
+  - {fileID: 11400000, guid: 7f0d1d5113eb1354bb83f7b194d0eef6, type: 2}
+  - {fileID: 11400000, guid: ed90c390928fabb45b6d2755071d5576, type: 2}
+  - {fileID: 11400000, guid: 69283bce3ffc3ff4db819c188a6548f6, type: 2}
+  - {fileID: 11400000, guid: 362d370df461eeb498ee3556fb1f0e44, type: 2}
+  - {fileID: 11400000, guid: fa3fa41c92bee4840a21fa33666d6d30, type: 2}
   - {fileID: 11400000, guid: 807ec1dd425743f49abf0e48157b9969, type: 2}
+  - {fileID: 11400000, guid: c0f3e6e531a9cda46984a5001bcd5d94, type: 2}
   allResources:
   - {fileID: 11400000, guid: 58022c09d228de144973b52240e382fa, type: 2}
   - {fileID: 11400000, guid: d9e028c9e0380224a92ce312a8a7fb3c, type: 2}
@@ -3168,8 +3176,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

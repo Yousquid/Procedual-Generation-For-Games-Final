@@ -17,7 +17,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 2426502218593902952, guid: 2323c62dbb5e1954b84ecfda186bd6d9, type: 3}
   buildingTypeEnum: 12
   buildingCategory: Production
-  specialEffectDescription: increase the income of this grid by 5 if this grid for
+  specialEffectDescription: increase the income of this grid by 20 if this grid for
     each adjacent Wasteland/Desert
   iconRenderer: {fileID: 1969287798316287282, guid: 2323c62dbb5e1954b84ecfda186bd6d9, type: 3}
   bonusFromAdjacentLandscapes:
@@ -37,5 +37,5 @@ MonoBehaviour:
   allowedBuildings: []
   mustHaveBuildings: []
   mustHaveLandscapes: []
-  incomePerMatch: 5
+  incomePerMatch: 20
   doublesAdjacentIncome: 0

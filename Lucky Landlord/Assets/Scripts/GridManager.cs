@@ -34,6 +34,8 @@ public class GridManager : MonoBehaviour
 
     public UIManager uiManager;
 
+    private TurnManager turnManager;
+
     public enum MouseMode { PlaceBuilding, PlaceResource, ExplorationMap, UISelection }
     public MouseMode currentMode = MouseMode.PlaceBuilding;
     public GameObject currentGhostObject;
@@ -83,6 +85,7 @@ public class GridManager : MonoBehaviour
         GenerateResources();
         VisualizeGrid();
         wealth = 50;
+        turnManager = GetComponent<TurnManager>();
     }
 
     private void InitializeGrid()
@@ -443,7 +446,10 @@ public class GridManager : MonoBehaviour
         ClickAndRevealFogCheck();
         BuildingModeGhostObjectPreview();
         OnClikEvent();
-
+        if (wealth < 0)
+        {
+            wealth = 0;
+        }
     }
 
     private List<GameGridObject> GetNeighbors(int x, int y)
@@ -679,7 +685,7 @@ public class GridManager : MonoBehaviour
                         gridObject.hasFogOfWar = false;
                         grid.TriggerGridObjectChanged(x, y);
                         revealedFogNumber++;
-                        fogRevealingPrice = 10 + revealedFogNumber * 4;
+                        fogRevealingPrice = 10 + (revealedFogNumber * 4)* (turnManager.currentTurn - 3) ;
                         wealth -= fogRevealingPrice;
                         VisualizeGrid();
                     }

@@ -22,6 +22,7 @@ public class RandomSelector : MonoBehaviour
     public Button checkMapButton;
     public TextMeshProUGUI checkButtonText;
     private bool isCheckingMap = false;
+    private TurnManager turnManager;
 
     public int rollPrice = 15;
     public int rollTimes = 0;
@@ -32,6 +33,7 @@ public class RandomSelector : MonoBehaviour
         confirmButton.onClick.AddListener(OnConfirm);
         confirmButton.gameObject.SetActive(false);
         checkMapButton.gameObject.SetActive(false);
+        turnManager = GetComponent<TurnManager>();
     }
 
     public void OnClickCheckMap()
@@ -159,6 +161,7 @@ public class RandomSelector : MonoBehaviour
                 gridManager.currentMode = GridManager.MouseMode.PlaceBuilding;
                 confirmButton.gameObject.SetActive(false);
                 uIManager.turnButton.gameObject.SetActive(true);
+                checkMapButton.gameObject.SetActive(false);
                 uIManager.shopButton.gameObject.SetActive(true);
             }
             else
@@ -168,6 +171,7 @@ public class RandomSelector : MonoBehaviour
                 gridManager.currentMode = GridManager.MouseMode.PlaceResource;
                 confirmButton.gameObject.SetActive(false);
                 uIManager.turnButton.gameObject.SetActive(true);
+                checkMapButton.gameObject.SetActive(false);
                 uIManager.shopButton.gameObject.SetActive(true);
             }
         }
@@ -180,6 +184,6 @@ public class RandomSelector : MonoBehaviour
             StartRandomSelection();
         }
 
-        rollPrice = 10 + rollTimes * 10;
+        rollPrice = 10 + (rollTimes * 3) * (turnManager.currentTurn - 2) + (turnManager.currentTurn)*10;
     }
 }

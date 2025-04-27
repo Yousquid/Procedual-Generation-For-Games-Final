@@ -33,19 +33,19 @@ public class TurnManager : MonoBehaviour
     {
         if (currentTurn <= 5)
         {
-            return 200;
+            return 300;
         }
         if (currentTurn > 5 && currentTurn <= 11)
         {
-            return 1000;
+            return 2000;
         }
         if (currentTurn > 11 && currentTurn <= 18)
         {
-            return 2000;
+            return 4300;
         }
         if (currentTurn > 18 && currentTurn <= 26)
         {
-            return 5000;
+            return 10000;
         }
         else return 0;
     }

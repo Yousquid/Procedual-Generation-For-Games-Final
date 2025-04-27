@@ -17,7 +17,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 4271343042369995763, guid: 53255722488333e4d913d9d6613f457d, type: 3}
   buildingTypeEnum: 8
   buildingCategory: Enhancement
-  specialEffectDescription: incrase the income of this grid by 2 for each adjacent
+  specialEffectDescription: incrase the income of this grid by 10 for each adjacent
     grid with Production Building
   iconRenderer: {fileID: 1560782315537176866, guid: 53255722488333e4d913d9d6613f457d, type: 3}
   bonusFromAdjacentLandscapes: []
@@ -35,9 +35,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
   - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
   - {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
+  - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
   allowedResources: []
   allowedBuildings: []
   mustHaveBuildings: []
   mustHaveLandscapes: []
-  incomePerMatch: 2
+  incomePerMatch: 10
   doublesAdjacentIncome: 0

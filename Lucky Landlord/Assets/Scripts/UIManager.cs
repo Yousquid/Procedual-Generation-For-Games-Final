@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
     {
         payTaxButton.gameObject.SetActive(true);
         payTaxBackground.gameObject.SetActive(true);
-        taxBackgroundText.text = $"You need to pay ${turnManager.GetCurrentTaxNeedToPay()} taxes!";
+        taxBackgroundText.text = $"You need to pay ${turnManager.GetCurrentTaxNeedToPay()} as rent!";
     }
 
     private void ClosePayTaxUIs()
