@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 
 public class RandomSelector : MonoBehaviour
 {
@@ -184,6 +185,14 @@ public class RandomSelector : MonoBehaviour
             StartRandomSelection();
         }
 
-        rollPrice = 10 + (rollTimes * 3) * (turnManager.currentTurn - 2) + (turnManager.currentTurn)*10;
+        if (turnManager.currentTurn >= 3)
+        {
+            rollPrice = 10 + (rollTimes * 3) * (turnManager.currentTurn - 2) + (turnManager.currentTurn) * 10;
+
+        }
+        else {
+            rollPrice = 10 + (rollTimes * 3) * 1 + (turnManager.currentTurn) * 10;
+
+        }
     }
 }
