@@ -187,11 +187,11 @@ public class RandomSelector : MonoBehaviour
 
         if (turnManager.currentTurn >= 3)
         {
-            rollPrice = 10 + (rollTimes * 3) * (turnManager.currentTurn - 2) + (turnManager.currentTurn) * 10;
+            rollPrice = 10 + (rollTimes * 2) * (turnManager.currentTurn - 2) + (turnManager.currentTurn) * 7;
 
         }
         else {
-            rollPrice = 10 + (rollTimes * 3) * 1 + (turnManager.currentTurn) * 10;
+            rollPrice = 10 + (rollTimes * 4) * 1 + (turnManager.currentTurn) * 10;
 
         }
     }

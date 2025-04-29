@@ -30,5 +30,4 @@ MonoBehaviour:
   allowedLandscapes:
   - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
   - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
-  - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
   incomePerMatch: 0

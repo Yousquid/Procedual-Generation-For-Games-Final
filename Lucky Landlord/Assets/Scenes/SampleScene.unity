@@ -1470,6 +1470,22 @@ MonoBehaviour:
   currentTurn: 0
   currentLeftTurns: 0
   uiManager: {fileID: 0}
+  taxMilestones:
+  - turnNumber: 5
+    taxAmount: 320
+    nextCycleTurns: 7
+  - turnNumber: 12
+    taxAmount: 2200
+    nextCycleTurns: 7
+  - turnNumber: 19
+    taxAmount: 6000
+    nextCycleTurns: 8
+  - turnNumber: 27
+    taxAmount: 15000
+    nextCycleTurns: 94
+  - turnNumber: 100
+    taxAmount: 0
+    nextCycleTurns: 0
 --- !u!1 &983548652
 GameObject:
   m_ObjectHideFlags: 0

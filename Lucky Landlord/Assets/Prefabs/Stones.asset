@@ -25,7 +25,8 @@ MonoBehaviour:
   canDoubleIncomeLandscapes:
   - {fileID: 11400000, guid: f6b729864326ae44687712193d6ebb6b, type: 2}
   - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
-  canDoubleIncomeBuildings: []
+  canDoubleIncomeBuildings:
+  - {fileID: 11400000, guid: 362d370df461eeb498ee3556fb1f0e44, type: 2}
   allowedLandscapes:
   - {fileID: 11400000, guid: fea9edb054fd6a142a60097d7e63e8e6, type: 2}
   - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}

@@ -63,11 +63,11 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void PayTax()
+    public void PayTax(int amount)
     {
         payTaxButton.gameObject.SetActive(true);
         payTaxBackground.gameObject.SetActive(true);
-        taxBackgroundText.text = $"You need to pay ${turnManager.GetCurrentTaxNeedToPay()} as rent!";
+        taxBackgroundText.text = $"You need to pay ${amount} as rent!";
     }
 
     private void ClosePayTaxUIs()
@@ -75,52 +75,19 @@ public class UIManager : MonoBehaviour
         payTaxButton.gameObject.SetActive(false);
         payTaxBackground.gameObject.SetActive(false);
     }
+
     public void OnClickPayTax()
     {
-        if (turnManager.currentTurn == 5)
+        int amount = turnManager.GetCurrentTaxNeedToPay();
+        if (GridManager.wealth < amount)
         {
-            if (GridManager.wealth >= turnManager.GetCurrentTaxNeedToPay())
-            {
-                turnManager.currentLeftTurns = 6;
-                GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
-                ClosePayTaxUIs();
-            }
-            else { SetRemindText("You Lose!!!!,Press R to restart."); }
-            
+            SetRemindText("You Lose!!!! Press R to restart.");
+            return;
         }
-        if (turnManager.currentTurn == 11)
-        {
-            if (GridManager.wealth >= turnManager.GetCurrentTaxNeedToPay())
-            {
-                turnManager.currentLeftTurns = 7;
-                GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
-                ClosePayTaxUIs();
-            }
-            else { SetRemindText("You Lose!!!!,Press R to restart."); }
 
-        }
-        if (turnManager.currentTurn == 18)
-        {
-            if (GridManager.wealth >= turnManager.GetCurrentTaxNeedToPay())
-            {
-                turnManager.currentLeftTurns = 8;
-                GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
-                ClosePayTaxUIs();
-            }
-            else { SetRemindText("You Lose!!!!,Press R to restart."); }
-
-        }
-        if (turnManager.currentTurn == 26)
-        {
-            if (GridManager.wealth >= turnManager.GetCurrentTaxNeedToPay())
-            {
-                turnManager.currentLeftTurns = 6;
-                GridManager.wealth -= turnManager.GetCurrentTaxNeedToPay();
-                ClosePayTaxUIs();
-            }
-            else { SetRemindText("You Lose!!!!,Press R to restart."); }
-
-        }
+        GridManager.wealth -= amount;
+        turnManager.OnTaxPaid();
+        ClosePayTaxUIs();
     }
     public void OnShopButtonPressed()
     {

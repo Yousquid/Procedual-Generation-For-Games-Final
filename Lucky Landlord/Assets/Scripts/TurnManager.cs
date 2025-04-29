@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -7,17 +8,28 @@ public class TurnManager : MonoBehaviour
     public int currentTurn = 0;
     public int currentLeftTurns;
     public UIManager uiManager;
+
+    public List<TaxMilestone> taxMilestones;
+
+    private int currentMilestoneIndex = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        currentLeftTurns = 5;
         uiManager = GetComponent<UIManager>();
+        gridManager = FindObjectOfType<GridManager>();
+
+        if (taxMilestones.Count > 0)
+        {
+            currentLeftTurns = taxMilestones[0].turnNumber;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        UpdateTaxPaymentTurns();
+        if (currentLeftTurns == 0)
+        {
+            uiManager.PayTax(GetCurrentTaxNeedToPay());
+        }
     }
 
     public void EndTurn()
@@ -25,37 +37,37 @@ public class TurnManager : MonoBehaviour
         GridManager.wealth += gridManager.GetAllIncomeValue();
         randomSelector.rollTimes -= 1;
         randomSelector.StartRandomSelection();
-        currentTurn += 1;
-        currentLeftTurns -= 1;
+
+        currentTurn++;
+        currentLeftTurns--;
+
+        if (currentLeftTurns < 0) currentLeftTurns = 0; // 防止负数
     }
 
     public int GetCurrentTaxNeedToPay()
     {
-        if (currentTurn <= 5)
+        if (currentMilestoneIndex < taxMilestones.Count)
         {
-            return 300;
+            return taxMilestones[currentMilestoneIndex].taxAmount;
         }
-        if (currentTurn > 5 && currentTurn <= 11)
-        {
-            return 2000;
-        }
-        if (currentTurn > 11 && currentTurn <= 18)
-        {
-            return 4300;
-        }
-        if (currentTurn > 18 && currentTurn <= 26)
-        {
-            return 10000;
-        }
-        else return 0;
+        return 0;
     }
 
-    private void UpdateTaxPaymentTurns()
+    public void OnTaxPaid()
     {
-        if (currentLeftTurns == 0)
+        // 玩家点击交税并成功支付后调用
+        if (currentMilestoneIndex < taxMilestones.Count)
         {
-            uiManager.PayTax();
+            currentLeftTurns = taxMilestones[currentMilestoneIndex].nextCycleTurns;
+            currentMilestoneIndex++;
         }
-        
+    }
+
+    [System.Serializable]
+    public class TaxMilestone
+    {
+        public int turnNumber;      // 到这个回合时触发
+        public int taxAmount;       // 需要交的税
+        public int nextCycleTurns;  // 成功交税后新的一轮周期有几回合
     }
 }

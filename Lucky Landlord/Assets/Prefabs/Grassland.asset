@@ -20,8 +20,6 @@ MonoBehaviour:
   resourceProbabilities:
   - resource: {fileID: 11400000, guid: d9e028c9e0380224a92ce312a8a7fb3c, type: 2}
     probability: 0.1
-  - resource: {fileID: 11400000, guid: 7715d6adcdf54174b9e2a9435024b078, type: 2}
-    probability: 0.05
   - resource: {fileID: 11400000, guid: 58022c09d228de144973b52240e382fa, type: 2}
     probability: 0.15
   landscapeName: Grassland
