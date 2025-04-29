@@ -36,6 +36,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 055e52d255da24e449650ba5215bcf20, type: 2}
   - {fileID: 11400000, guid: 4dae55498caeecc48b362f61682a3e6a, type: 2}
   - {fileID: 11400000, guid: 9ce0be46cdaa9d4478dcccba600068f7, type: 2}
+  - {fileID: 11400000, guid: 63f1add104fe7e94b8500d40d116f5a6, type: 2}
   allowedResources: []
   allowedBuildings: []
   mustHaveBuildings: []

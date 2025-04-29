@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI remindText;
     public Button cancelPlacementButton;
     public Button continuePlacementButton;
-    private float remindMinimalShowingTimeLimit = .5f;
+    private float remindMinimalShowingTimeLimit = 1f;
     private float remindTimer = 0;
     private bool isShowingRemindText = false;
     public Image remindImageBackground;

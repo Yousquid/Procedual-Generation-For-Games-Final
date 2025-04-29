@@ -33,7 +33,7 @@ MonoBehaviour:
   maxBuildingLimit: 3
   baseIncomeValue: 1
   specialEffectDescription: Increase the income of this grid by 1 for each adjacent
-    Plain, Grass, Lake Landscape.
+    Plain, Grassland, Lake Landscape.
   baseProbability: 0.136
   bonusFromAdjacentLandscapes:
   - {fileID: 11400000, guid: 82e8d353939717643bce69d37a208dd8, type: 2}
