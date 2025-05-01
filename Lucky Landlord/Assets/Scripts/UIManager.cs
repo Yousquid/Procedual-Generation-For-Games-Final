@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
     public Button payTaxButton;
     public Image payTaxBackground;
     public TextMeshProUGUI taxBackgroundText;
+    public Button rulebookButton;
+    public TextMeshProUGUI rulebookText;
+    public Image rublebookImage;
     
 
 
@@ -37,11 +40,28 @@ public class UIManager : MonoBehaviour
         remindImageBackground.gameObject.SetActive(false);
         payTaxButton.gameObject.SetActive(false);
         payTaxBackground.gameObject.SetActive(false);
+        rublebookImage.gameObject.SetActive(false);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         turnManager = GetComponent<TurnManager>();
+    }
+
+    public void OnClickCheckRuleBook()
+    {
+        if (rublebookImage.gameObject.activeSelf)
+        {
+            rublebookImage.gameObject.SetActive(false);
+            gridManager.currentMode = MouseMode.ExplorationMap;
+            rulebookText.text = "?";
+        }
+        else if (!rublebookImage.gameObject.activeSelf && gridManager.currentMode == MouseMode.ExplorationMap)
+        {
+            rublebookImage.gameObject.SetActive(true);
+            gridManager.currentMode = MouseMode.UISelection;
+            rulebookText.text = "X";
+        }
     }
 
     private void UpdateTaxText()

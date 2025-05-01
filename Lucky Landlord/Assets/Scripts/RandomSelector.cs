@@ -108,6 +108,7 @@ public class RandomSelector : MonoBehaviour
         confirmButton.gameObject.SetActive(true);
         uIManager.turnButton.gameObject.SetActive(false);
         uIManager.shopButton.gameObject.SetActive(false);
+        uIManager.rulebookButton.gameObject.SetActive(false);
         checkMapButton.gameObject.SetActive(true);
         Time.timeScale = 0; // ‘›Õ£”Œœ∑
 
