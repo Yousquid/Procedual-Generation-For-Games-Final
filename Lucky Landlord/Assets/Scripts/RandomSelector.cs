@@ -119,7 +119,7 @@ public class RandomSelector : MonoBehaviour
         }
 
         // 生成新选项
-        float spacing = 640f; // 选项间距
+        float spacing = 600f; // 选项间距
         for (int i = 0; i < currentOptions.Count; i++)
         {
             var option = currentOptions[i];  // 冻结当前项
@@ -185,7 +185,10 @@ public class RandomSelector : MonoBehaviour
         { 
             StartRandomSelection();
         }
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         if (turnManager.currentTurn >= 3)
         {
             rollPrice = 10 + (rollTimes * 2) * (turnManager.currentTurn - 2) + (turnManager.currentTurn) * 7;
